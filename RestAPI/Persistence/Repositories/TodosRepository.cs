@@ -72,7 +72,7 @@ namespace Persistence.Repositories
             var sqlInsert = @$"INSERT INTO {TableName} (id, title, description, difficulty, date_created, isdone) VALUES(@id, @title, @description, @difficulty, @date_created, @isdone)";
             var rowsAffected = _sqlClient.ExecuteAsync(sqlInsert, new
             {
-                id = Guid.NewGuid(),
+                id = todoItem.Id, // should be Guid
                 title = todoItem.Title,
                 description = todoItem.Description,
                 difficulty = todoItem.Difficulty.ToString(),

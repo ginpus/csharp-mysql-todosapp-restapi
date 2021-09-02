@@ -3,13 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestAPI", "RestAPI\RestAPI.csproj", "{E2C5DFA8-3307-435B-B75E-70AB9ADC4229}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestAPI", "RestAPI\RestAPI.csproj", "{E2C5DFA8-3307-435B-B75E-70AB9ADC4229}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistence\Persistence.csproj", "{A744B6BB-4CC3-4B4C-BCC4-718EBD4C0623}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "Persistence\Persistence.csproj", "{A744B6BB-4CC3-4B4C-BCC4-718EBD4C0623}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{9959301F-DA49-470B-B471-8FAD6F5721F1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{FCB95727-037D-4EA6-9A0E-89B3A3F0AAC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Contracts\Contracts.csproj", "{9959301F-DA49-470B-B471-8FAD6F5721F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +27,6 @@ Global
 		{9959301F-DA49-470B-B471-8FAD6F5721F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9959301F-DA49-470B-B471-8FAD6F5721F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9959301F-DA49-470B-B471-8FAD6F5721F1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FCB95727-037D-4EA6-9A0E-89B3A3F0AAC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FCB95727-037D-4EA6-9A0E-89B3A3F0AAC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FCB95727-037D-4EA6-9A0E-89B3A3F0AAC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FCB95727-037D-4EA6-9A0E-89B3A3F0AAC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

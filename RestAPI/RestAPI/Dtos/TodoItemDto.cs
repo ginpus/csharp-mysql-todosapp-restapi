@@ -14,10 +14,5 @@ namespace RestAPI.Dtos
         public Difficulty Difficulty { get; set; }
         public DateTime Date_Created { get; set; }
         public bool IsDone { get; set; }
-
-        public override string ToString()
-        {
-            return $"{Id} - {Title} - {Description} - {Difficulty} - {Date_Created} - Is Done?: {IsDone}";
-        }
     }
 }

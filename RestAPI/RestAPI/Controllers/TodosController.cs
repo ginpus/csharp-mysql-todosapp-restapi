@@ -22,7 +22,7 @@ namespace RestAPI.Controllers
 
         [HttpGet]
         [Route("todos")]
-        public async Task<IEnumerable<TodoItemDto>> GetTodos()
+        public async Task<IEnumerable<TodoItemDto>> GetTodos() // Gauti visus TodoItems
         {
             var todos = await _todosRepository.GetAllAsync();
 
@@ -33,7 +33,7 @@ namespace RestAPI.Controllers
 
         [HttpGet]
         [Route("todos/{todoId}")]
-        public async Task<ActionResult<TodoItemDto>> GetTodoItemByIdAsync(string todoId) // change to Guid
+        public async Task<ActionResult<TodoItemDto>> GetTodoItemByIdAsync(string todoId) // change to Guid! // Gauti konkretų TodoItem
         {
             var todo = await _todosRepository.GetTodoItemByIdAsync(todoId);
 
@@ -47,11 +47,11 @@ namespace RestAPI.Controllers
 
         [HttpPost]
         [Route("todos")]
-        public async Task<ActionResult<TodoItemDto>> AddTodo(AddTodoDto todoDto)
+        public async Task<ActionResult<TodoItemDto>> AddTodo(AddTodoDto todoDto) // Pridėti TodoItem
         {
             var todoItem = new TodoItem
             {
-                Id = "1",
+                Id = "7", //should be Guid
                 Title = todoDto.Title,
                 Description = todoDto.Description,
                 Difficulty = todoDto.Difficulty,
@@ -61,7 +61,8 @@ namespace RestAPI.Controllers
 
             await _todosRepository.SaveAsync(todoItem);
 
-            return CreatedAtAction("GetTodoItemByIdAsync", new { id = todoItem.Id }, todoItem.AsDto());
+            return todoItem.AsDto();
+            //return CreatedAtAction(nameof(GetTodoItemByIdAsync), new { id = todoItem.Id }, todoItem.AsDto()); // Returns exception "No route matches the supplied values."
         }
 
         /*
