@@ -13,6 +13,11 @@ namespace Persistence.Repositories
         private const string TableName = "todos";
         private readonly ISqlClient _sqlClient;
 
+        public TodosRepository(ISqlClient sqlClient)
+        {
+            _sqlClient = sqlClient;
+        }
+
         public Task<int> DeleteAllAsync()
         {
             var sqlDeleteAll = $"DELETE FROM {TableName}";
@@ -52,11 +57,11 @@ namespace Persistence.Repositories
             return _sqlClient.QueryAsync<TodoItem>(sqlSelect);
         }
 
-        public Task<IEnumerable<TodoItem>> GetTodoItemByIdAsync(string id)
+        public Task<TodoItem> GetTodoItemByIdAsync(string id)
         {
             var sqlSelect = $"SELECT id, title, description, difficulty, date_created, isdone FROM {TableName} where id = @id ORDER BY date_created desc";
 
-            return _sqlClient.QueryAsync<TodoItem>(sqlSelect, new
+            return _sqlClient.QueryFirstOrDefaultAsync<TodoItem>(sqlSelect, new
             {
                 id = id
             });

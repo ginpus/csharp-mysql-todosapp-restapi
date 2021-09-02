@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Persistence.Models;
 using Persistence.Repositories;
+using RestAPI.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,42 +22,49 @@ namespace RestAPI.Controllers
 
         [HttpGet]
         [Route("todos")]
-        public async Task<IEnumerable<TodoItem>> GetTodos()
+        public async Task<IEnumerable<TodoItemDto>> GetTodos()
         {
-            return await _todosRepository.GetAllAsync();
+            var todos = await _todosRepository.GetAllAsync();
+
+            var todosDto = todos.Select(todoItem => todoItem.AsDto());
+
+            return todosDto;
         }
 
-        /*[HttpGet]
-        [Route("comments/{commentId}")]
-        public ActionResult<Comment> GetComment(Guid commentId)
+        [HttpGet]
+        [Route("todos/{todoId}")]
+        public async Task<ActionResult<TodoItemDto>> GetTodoItemByIdAsync(string todoId) // change to Guid
         {
-            var comment = _commentsRepository.Get(commentId);
+            var todo = await _todosRepository.GetTodoItemByIdAsync(todoId);
 
-            if (comment == null)
+            if (todo == null)
             {
                 return NotFound();
             }
 
-            return Ok(comment);
+            return Ok(todo.AsDto());
         }
 
         [HttpPost]
-        [Route("comments")]
-        public ActionResult<CommentResponse> AddComment([FromBody] AddCommentRequest request)
+        [Route("todos")]
+        public async Task<ActionResult<TodoItemDto>> AddTodo(AddTodoDto todoDto)
         {
-            var comment = new Comment
+            var todoItem = new TodoItem
             {
-                Id = Guid.NewGuid(),
-                Name = request.Name,
-                Email = request.Email,
-                Body = request.Body
+                Id = "1",
+                Title = todoDto.Title,
+                Description = todoDto.Description,
+                Difficulty = todoDto.Difficulty,
+                IsDone = false,
+                Date_Created = DateTime.Now
             };
 
-            _commentsRepository.Add(comment);
+            await _todosRepository.SaveAsync(todoItem);
 
-            return CreatedAtAction("GetComment", new { commentId = comment.Id }, comment.MapToCommentResponse());
+            return CreatedAtAction("GetTodoItemByIdAsync", new { id = todoItem.Id }, todoItem.AsDto());
         }
 
+        /*
         [HttpPut]
         [Route("comments/{commentId}")]
         public ActionResult<CommentResponse> UpdateComment(Guid commentId, UpdateCommentRequest request)

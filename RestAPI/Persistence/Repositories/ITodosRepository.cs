@@ -11,7 +11,7 @@ namespace Persistence.Repositories
     {
         Task<IEnumerable<TodoItem>> GetAllAsync();
 
-        Task<IEnumerable<TodoItem>> GetTodoItemByIdAsync(string id);
+        Task<TodoItem> GetTodoItemByIdAsync(string id);
 
         Task<int> SaveAsync(TodoItem todoItem);
 
