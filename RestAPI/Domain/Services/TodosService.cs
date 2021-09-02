@@ -34,7 +34,7 @@ namespace Domain.Services
             return await todoCreate;
         }
 
-        public async Task<int> DeleteByIdAsync(int id)
+        public async Task<int> DeleteByIdAsync(string id)
         {
             var todoDelete = _todosRepository.DeleteAsync(id);
 
@@ -43,7 +43,7 @@ namespace Domain.Services
             return await todoDelete;
         }
 
-        public async Task<int> EditAsync(int id, string name, string description)
+        public async Task<int> EditAsync(string id, string name, string description)
         {
             var todoEdit = _todosRepository.EditAsync(id, name, description);
 

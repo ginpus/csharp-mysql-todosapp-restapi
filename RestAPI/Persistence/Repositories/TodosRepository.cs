@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Persistence.Repositories
 {
-    internal class TodosRepository : ITodosRepository
+    public class TodosRepository : ITodosRepository
     {
         private const string TableName = "todos";
         private readonly ISqlClient _sqlClient;
@@ -21,7 +21,7 @@ namespace Persistence.Repositories
             return rowsAffected;
         }
 
-        public Task<int> DeleteAsync(int id)
+        public Task<int> DeleteAsync(string id)
         {
             var sqlDelete = $"DELETE FROM {TableName} WHERE id = @id";
 
@@ -32,7 +32,7 @@ namespace Persistence.Repositories
             return rowsAffected;
         }
 
-        public Task<int> EditAsync(int id, string title, string description)
+        public Task<int> EditAsync(string id, string title, string description)
         {
             var sqlUpdate = $"UPDATE {TableName} SET title = @title, description = @description where id = @id";
 
@@ -47,21 +47,32 @@ namespace Persistence.Repositories
 
         public Task<IEnumerable<TodoItem>> GetAllAsync()
         {
-            var sqlSelect = $"SELECT id, title, description, difficulty, date_created FROM {TableName}  ORDER BY date_created desc";
+            var sqlSelect = $"SELECT id, title, description, difficulty, date_created, isdone FROM {TableName} ORDER BY date_created desc";
 
             return _sqlClient.QueryAsync<TodoItem>(sqlSelect);
         }
 
+        public Task<IEnumerable<TodoItem>> GetTodoItemByIdAsync(string id)
+        {
+            var sqlSelect = $"SELECT id, title, description, difficulty, date_created, isdone FROM {TableName} where id = @id ORDER BY date_created desc";
+
+            return _sqlClient.QueryAsync<TodoItem>(sqlSelect, new
+            {
+                id = id
+            });
+        }
+
         public Task<int> SaveAsync(TodoItem todoItem)
         {
-            var sqlInsert = @$"INSERT INTO {TableName} (id, title, description, difficulty, date_created) VALUES(@id, @title, @description, @difficulty, @date_created)";
+            var sqlInsert = @$"INSERT INTO {TableName} (id, title, description, difficulty, date_created, isdone) VALUES(@id, @title, @description, @difficulty, @date_created, @isdone)";
             var rowsAffected = _sqlClient.ExecuteAsync(sqlInsert, new
             {
                 id = Guid.NewGuid(),
                 title = todoItem.Title,
                 description = todoItem.Description,
                 difficulty = todoItem.Difficulty.ToString(),
-                date_created = todoItem.Date_Created
+                date_created = todoItem.Date_Created,
+                isdone = todoItem.IsDone
             }); ;
             return rowsAffected;
         }

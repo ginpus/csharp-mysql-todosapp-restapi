@@ -1,0 +1,15 @@
+F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Persistence\bin\Debug\net5.0\Persistence.deps.json
+F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Persistence\bin\Debug\net5.0\Persistence.dll
+F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Persistence\bin\Debug\net5.0\ref\Persistence.dll
+F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Persistence\bin\Debug\net5.0\Persistence.pdb
+F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Persistence\bin\Debug\net5.0\Contracts.dll
+F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Persistence\bin\Debug\net5.0\Contracts.pdb
+F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Persistence\obj\Debug\net5.0\Persistence.csproj.AssemblyReference.cache
+F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Persistence\obj\Debug\net5.0\Persistence.GeneratedMSBuildEditorConfig.editorconfig
+F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Persistence\obj\Debug\net5.0\Persistence.AssemblyInfoInputs.cache
+F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Persistence\obj\Debug\net5.0\Persistence.AssemblyInfo.cs
+F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Persistence\obj\Debug\net5.0\Persistence.csproj.CoreCompileInputs.cache
+F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Persistence\obj\Debug\net5.0\Persistence.csproj.CopyComplete
+F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Persistence\obj\Debug\net5.0\Persistence.dll
+F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Persistence\obj\Debug\net5.0\ref\Persistence.dll
+F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Persistence\obj\Debug\net5.0\Persistence.pdb

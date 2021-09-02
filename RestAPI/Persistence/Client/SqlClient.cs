@@ -35,5 +35,11 @@ namespace Persistence.Client
             using var connection = new MySqlConnection(_connectionString);
             return connection.QueryAsync<T>(sql, param);
         }
+
+        public Task<T> QueryFirstOrDefaultAsync<T>(string sql, object param = null)
+        {
+            using var connection = new MySqlConnection(_connectionString);
+            return connection.QueryFirstOrDefaultAsync<T>(sql, param);
+        }
     }
 }

@@ -14,9 +14,9 @@ namespace Domain
 
         Task<int> CreateAsync(TodoItem todoItem);
 
-        Task<int> EditAsync(int id, string name, string description);
+        Task<int> EditAsync(string id, string name, string description);
 
-        Task<int> DeleteByIdAsync(int id);
+        Task<int> DeleteByIdAsync(string id);
 
         Task<int> ClearAllAsync();
     }

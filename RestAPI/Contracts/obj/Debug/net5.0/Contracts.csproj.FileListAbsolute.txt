@@ -1,0 +1,12 @@
+F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Contracts\bin\Debug\net5.0\Contracts.deps.json
+F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Contracts\bin\Debug\net5.0\Contracts.dll
+F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Contracts\bin\Debug\net5.0\ref\Contracts.dll
+F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Contracts\bin\Debug\net5.0\Contracts.pdb
+F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Contracts\obj\Debug\net5.0\Contracts.csproj.AssemblyReference.cache
+F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Contracts\obj\Debug\net5.0\Contracts.GeneratedMSBuildEditorConfig.editorconfig
+F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Contracts\obj\Debug\net5.0\Contracts.AssemblyInfoInputs.cache
+F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Contracts\obj\Debug\net5.0\Contracts.AssemblyInfo.cs
+F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Contracts\obj\Debug\net5.0\Contracts.csproj.CoreCompileInputs.cache
+F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Contracts\obj\Debug\net5.0\Contracts.dll
+F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Contracts\obj\Debug\net5.0\ref\Contracts.dll
+F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Contracts\obj\Debug\net5.0\Contracts.pdb

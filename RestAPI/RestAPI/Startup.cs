@@ -7,6 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using MySql.Data.MySqlClient;
+using Persistence.Client;
+using Persistence.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,12 +29,22 @@ namespace RestAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            /*            var connectionStringBuilder = new MySqlConnectionStringBuilder();
+
+                        connectionStringBuilder.Server = "localhost";
+                        connectionStringBuilder.Port = 3306;
+                        connectionStringBuilder.UserID = "test";
+                        connectionStringBuilder.Password = "test";
+                        connectionStringBuilder.Database = "todosdb";
+
+                        var connectionString = connectionStringBuilder.GetConnectionString(true);
+
+                        services.AddTransient<ISqlClient>(_ => new SqlClient(connectionString));*/
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "RestAPI", Version = "v1" });
-            });
+            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "RestAPI", Version = "v1" }); });
+
+            services.AddSingleton<ITodosRepository, TodosRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,14 +59,11 @@ namespace RestAPI
 
             app.UseHttpsRedirection();
 
+            // request.Route - "localhost:5001/weatherforecast"
+            // request.body
             app.UseRouting();
 
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

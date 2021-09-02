@@ -11,11 +11,13 @@ namespace Persistence.Repositories
     {
         Task<IEnumerable<TodoItem>> GetAllAsync();
 
+        Task<IEnumerable<TodoItem>> GetTodoItemByIdAsync(string id);
+
         Task<int> SaveAsync(TodoItem todoItem);
 
-        Task<int> EditAsync(int id, string title, string description);
+        Task<int> EditAsync(string id, string title, string description);
 
-        Task<int> DeleteAsync(int id);
+        Task<int> DeleteAsync(string id);
 
         Task<int> DeleteAllAsync();
     }
