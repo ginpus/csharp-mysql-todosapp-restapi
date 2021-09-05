@@ -18,56 +18,58 @@ namespace Persistence.Repositories
             _sqlClient = sqlClient;
         }
 
-        public Task<int> DeleteAllAsync()
+        public async Task<int> DeleteAllAsync()
         {
             var sqlDeleteAll = $"DELETE FROM {TableName}";
 
-            var rowsAffected = _sqlClient.ExecuteAsync(sqlDeleteAll);
+            var rowsAffected = await _sqlClient.ExecuteAsync(sqlDeleteAll);
             return rowsAffected;
         }
 
-        public Task<int> DeleteAsync(string id)
+        public async Task<int> DeleteAsync(string id)
         {
             var sqlDelete = $"DELETE FROM {TableName} WHERE id = @id";
 
-            var rowsAffected = _sqlClient.ExecuteAsync(sqlDelete, new
+            var rowsAffected = await _sqlClient.ExecuteAsync(sqlDelete, new
             {
                 id = id
             });
             return rowsAffected;
         }
 
-        public Task<int> EditAsync(string id, string title, string description)
+        public async Task<int> EditAsync(string id, UpdateTodo todo) // should be GUID
         {
-            var sqlUpdate = $"UPDATE {TableName} SET title = @title, description = @description where id = @id";
+            var sqlUpdate = $"UPDATE {TableName} SET title = @title, description = @description, difficulty = @difficulty, isdone = @isdone  where id = @id";
 
-            var rowsAffected = _sqlClient.ExecuteAsync(sqlUpdate, new
+            var rowsAffected = await _sqlClient.ExecuteAsync(sqlUpdate, new
             {
                 id = id,
-                title = title,
-                description = description
+                title = todo.Title,
+                description = todo.Description,
+                difficulty = todo.Difficulty,
+                isdone = todo.IsDone
             });
             return rowsAffected;
         }
 
-        public Task<IEnumerable<TodoItem>> GetAllAsync()
+        public async Task<IEnumerable<TodoItem>> GetAllAsync()
         {
             var sqlSelect = $"SELECT id, title, description, difficulty, date_created, isdone FROM {TableName} ORDER BY date_created desc";
 
-            return _sqlClient.QueryAsync<TodoItem>(sqlSelect);
+            return await _sqlClient.QueryAsync<TodoItem>(sqlSelect);
         }
 
-        public Task<TodoItem> GetTodoItemByIdAsync(string id)
+        public async Task<TodoItem> GetTodoItemByIdAsync(string id)
         {
             var sqlSelect = $"SELECT id, title, description, difficulty, date_created, isdone FROM {TableName} where id = @id ORDER BY date_created desc";
 
-            return _sqlClient.QueryFirstOrDefaultAsync<TodoItem>(sqlSelect, new
+            return await _sqlClient.QueryFirstOrDefaultAsync<TodoItem>(sqlSelect, new
             {
                 id = id
             });
         }
 
-        public Task<int> SaveAsync(TodoItem todoItem)
+        public async Task<int> SaveAsync(TodoItem todoItem)
         {
             var sqlInsert = @$"INSERT INTO {TableName} (id, title, description, difficulty, date_created, isdone) VALUES(@id, @title, @description, @difficulty, @date_created, @isdone)";
             var rowsAffected = _sqlClient.ExecuteAsync(sqlInsert, new
@@ -79,7 +81,7 @@ namespace Persistence.Repositories
                 date_created = todoItem.Date_Created,
                 isdone = todoItem.IsDone
             }); ;
-            return rowsAffected;
+            return await rowsAffected;
         }
     }
 }

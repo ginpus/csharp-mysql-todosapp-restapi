@@ -15,7 +15,7 @@ namespace Persistence.Repositories
 
         Task<int> SaveAsync(TodoItem todoItem);
 
-        Task<int> EditAsync(string id, string title, string description);
+        Task<int> EditAsync(string id, UpdateTodo todo);
 
         Task<int> DeleteAsync(string id);
 

@@ -7,15 +7,17 @@ using System.Threading.Tasks;
 
 namespace RestAPI.Dtos
 {
-    public class AddTodoDto
+    public class UpdateTodoDto
     {
         [Required]
         public string Title { get; set; }
 
-        [Required]
         public string Description { get; set; }
 
         [Required]
         public Difficulty Difficulty { get; set; }
+
+        [Required]
+        public bool IsDone { get; set; }
     }
 }

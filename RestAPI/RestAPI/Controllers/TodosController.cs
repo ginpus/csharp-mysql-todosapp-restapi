@@ -24,11 +24,15 @@ namespace RestAPI.Controllers
         [Route("todos")]
         public async Task<IEnumerable<TodoItemDto>> GetTodos() // Gauti visus TodoItems
         {
-            var todos = await _todosRepository.GetAllAsync();
+            var todos = (await _todosRepository.GetAllAsync())
+                        .Select(todoItem => todoItem.AsDto());
 
-            var todosDto = todos.Select(todoItem => todoItem.AsDto());
+            return todos;
 
-            return todosDto;
+            ////same as:
+            //var todos = await _todosRepository.GetAllAsync();
+            //var todosDto = todos.Select(todoItem => todoItem.AsDto());
+            //return todosDto;
         }
 
         [HttpGet]
@@ -51,7 +55,7 @@ namespace RestAPI.Controllers
         {
             var todoItem = new TodoItem
             {
-                Id = "7", //should be Guid
+                Id = "9", //should be Guid
                 Title = todoDto.Title,
                 Description = todoDto.Description,
                 Difficulty = todoDto.Difficulty,
@@ -65,42 +69,49 @@ namespace RestAPI.Controllers
             //return CreatedAtAction(nameof(GetTodoItemByIdAsync), new { id = todoItem.Id }, todoItem.AsDto()); // Returns exception "No route matches the supplied values."
         }
 
-        /*
         [HttpPut]
-        [Route("comments/{commentId}")]
-        public ActionResult<CommentResponse> UpdateComment(Guid commentId, UpdateCommentRequest request)
+        [Route("todos/{todoId}")]
+        public async Task<ActionResult<UpdateTodoDto>> UpdateTodo(string todoId, UpdateTodoDto todo)
         {
-            if (request is null)
+            if (todo is null)
             {
                 return BadRequest();
             }
 
-            var commentToUpdate = _commentsRepository.Get(commentId);
+            var todoToUpdate = _todosRepository.GetTodoItemByIdAsync(todoId);
 
-            if (commentToUpdate is null)
+            if (todoToUpdate is null)
             {
                 return NotFound();
             }
 
-            var updatedComment = _commentsRepository.Update(commentId, request.Email, request.Body);
+            var todoReveresed = new UpdateTodo
+            {
+                Title = todo.Title,
+                Description = todo.Description,
+                Difficulty = todo.Difficulty,
+                IsDone = todo.IsDone
+            };
 
-            return updatedComment.MapToCommentResponse();
+            var updatedTodo = await _todosRepository.EditAsync(todoId, todoReveresed);
+
+            return todoReveresed.AsDto();
         }
 
         [HttpDelete]
-        [Route("comments/{commentId}")]
-        public IActionResult DeleteComment(Guid commentId)
+        [Route("todos/{todoId}")]
+        public async Task<IActionResult> DeleteTodo(string todoId) // should be GUID
         {
-            var commentToDelete = _commentsRepository.Get(commentId);
+            var todoToUpdate = _todosRepository.GetTodoItemByIdAsync(todoId);
 
-            if (commentToDelete is null)
+            if (todoToUpdate is null)
             {
                 return NotFound();
             }
 
-            _commentsRepository.Delete(commentId);
+            await _todosRepository.DeleteAsync(todoId);
 
             return NoContent();
-        }*/
+        }
     }
 }
