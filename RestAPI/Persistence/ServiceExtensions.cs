@@ -1,6 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Dapper;
+using Microsoft.Extensions.DependencyInjection;
 using MySql.Data.MySqlClient;
 using Persistence.Client;
+using Persistence.Models;
 using Persistence.Repositories;
 using System;
 using System.Collections.Generic;
@@ -12,6 +14,17 @@ namespace Persistence
 {
     public static class ServiceExtensions
     {
+        public static IServiceCollection AddPersistence(this IServiceCollection services)
+        {
+            SqlMapper.AddTypeHandler(new MySqlGuidTypeHandler());
+            SqlMapper.RemoveTypeMap(typeof(Guid));
+            SqlMapper.RemoveTypeMap(typeof(Guid?));
+
+            return services
+                .AddSqlClient()
+                .AddRepositories();
+        }
+
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             services.AddSingleton<ITodosRepository, TodosRepository>();

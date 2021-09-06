@@ -26,7 +26,7 @@ namespace Persistence.Repositories
             return rowsAffected;
         }
 
-        public async Task<int> DeleteAsync(string id)
+        public async Task<int> DeleteAsync(Guid id)
         {
             var sqlDelete = $"DELETE FROM {TableName} WHERE id = @id";
 
@@ -37,7 +37,7 @@ namespace Persistence.Repositories
             return rowsAffected;
         }
 
-        public async Task<int> EditAsync(string id, UpdateTodo todo) // should be GUID
+        public async Task<int> EditAsync(Guid id, UpdateTodo todo)
         {
             var sqlUpdate = $"UPDATE {TableName} SET title = @title, description = @description, difficulty = @difficulty, isdone = @isdone  where id = @id";
 
@@ -46,7 +46,7 @@ namespace Persistence.Repositories
                 id = id,
                 title = todo.Title,
                 description = todo.Description,
-                difficulty = todo.Difficulty,
+                difficulty = todo.Difficulty.ToString(),
                 isdone = todo.IsDone
             });
             return rowsAffected;
@@ -59,7 +59,7 @@ namespace Persistence.Repositories
             return await _sqlClient.QueryAsync<TodoItem>(sqlSelect);
         }
 
-        public async Task<TodoItem> GetTodoItemByIdAsync(string id)
+        public async Task<TodoItem> GetTodoItemByIdAsync(Guid id)
         {
             var sqlSelect = $"SELECT id, title, description, difficulty, date_created, isdone FROM {TableName} where id = @id ORDER BY date_created desc";
 

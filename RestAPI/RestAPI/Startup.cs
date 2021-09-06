@@ -1,3 +1,4 @@
+using Dapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -42,11 +43,15 @@ namespace RestAPI
 
                         services.AddTransient<ISqlClient>(_ => new SqlClient(connectionString));*/
 
-            services.AddSqlClient();
-
             //services.AddSingleton<ITodosRepository, TodosRepository>();
 
-            services.AddRepositories();
+            //SAME SIMPLIFIED
+            //services.AddSqlClient();
+
+            //services.AddRepositories();
+
+            //SAME EVEN MORE SIMPLIFIED (PERSITENCE SERVICE EXTENSION)
+            services.AddPersistence();
 
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "RestAPI", Version = "v1" }); });

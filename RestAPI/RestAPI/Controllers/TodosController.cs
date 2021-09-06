@@ -37,7 +37,7 @@ namespace RestAPI.Controllers
 
         [HttpGet]
         [Route("todos/{todoId}")]
-        public async Task<ActionResult<TodoItemDto>> GetTodoItemByIdAsync(string todoId) // change to Guid! // Gauti konkretų TodoItem
+        public async Task<ActionResult<TodoItemDto>> GetTodoItemByIdAsync(Guid todoId) // Gauti konkretų TodoItem
         {
             var todo = await _todosRepository.GetTodoItemByIdAsync(todoId);
 
@@ -55,7 +55,7 @@ namespace RestAPI.Controllers
         {
             var todoItem = new TodoItem
             {
-                Id = "9", //should be Guid
+                Id = Guid.NewGuid(),
                 Title = todoDto.Title,
                 Description = todoDto.Description,
                 Difficulty = todoDto.Difficulty,
@@ -71,7 +71,7 @@ namespace RestAPI.Controllers
 
         [HttpPut]
         [Route("todos/{todoId}")]
-        public async Task<ActionResult<UpdateTodoDto>> UpdateTodo(string todoId, UpdateTodoDto todo)
+        public async Task<ActionResult<UpdateTodoDto>> UpdateTodo(Guid todoId, UpdateTodoDto todo)
         {
             if (todo is null)
             {
@@ -100,7 +100,7 @@ namespace RestAPI.Controllers
 
         [HttpDelete]
         [Route("todos/{todoId}")]
-        public async Task<IActionResult> DeleteTodo(string todoId) // should be GUID
+        public async Task<IActionResult> DeleteTodo(Guid todoId)
         {
             var todoToUpdate = _todosRepository.GetTodoItemByIdAsync(todoId);
 
