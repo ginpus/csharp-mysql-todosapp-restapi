@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Persistence.Models
+namespace Persistence.Models.ReadModels
 {
-    public class TodoItem
+    public class TodoItemReadModel
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
@@ -15,10 +15,5 @@ namespace Persistence.Models
         public Difficulty Difficulty { get; set; }
         public DateTime Date_Created { get; set; }
         public bool IsDone { get; set; }
-
-        public override string ToString()
-        {
-            return $"{Id} - {Title} - {Description} - {Difficulty} - {Date_Created} - Is Done?: {IsDone}";
-        }
     }
 }

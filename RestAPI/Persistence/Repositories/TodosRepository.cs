@@ -74,7 +74,7 @@ namespace Persistence.Repositories
             var sqlInsert = @$"INSERT INTO {TableName} (id, title, description, difficulty, date_created, isdone) VALUES(@id, @title, @description, @difficulty, @date_created, @isdone)";
             var rowsAffected = _sqlClient.ExecuteAsync(sqlInsert, new
             {
-                id = todoItem.Id, // should be Guid
+                id = todoItem.Id,
                 title = todoItem.Title,
                 description = todoItem.Description,
                 difficulty = todoItem.Difficulty.ToString(),
@@ -82,6 +82,21 @@ namespace Persistence.Repositories
                 isdone = todoItem.IsDone
             }); ;
             return await rowsAffected;
+        }
+
+        public async Task<int> SaveOrUpdate(TodoItem model)
+        {
+            var sql = @$"INSERT INTO {TableName} (id, title, description, difficulty, date_created, isdone) VALUES(@id, @title, @description, @difficulty, @date_created, @isdone) ON DUPLICATE KEY UPDATE title = @title, description = @description, difficulty = @difficulty, isdone = @isdone";
+
+            return await _sqlClient.ExecuteAsync(sql, new
+            {
+                model.Id,
+                model.Title,
+                model.Description,
+                difficulty = model.Difficulty.ToString(),
+                model.Date_Created,
+                model.IsDone
+            });
         }
     }
 }
