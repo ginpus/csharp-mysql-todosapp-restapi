@@ -20,5 +20,7 @@ namespace Persistence.Repositories
         Task<int> DeleteAsync(Guid id);
 
         Task<int> DeleteAllAsync();
+
+        Task<int> SaveOrUpdate(TodoItem model);
     }
 }
