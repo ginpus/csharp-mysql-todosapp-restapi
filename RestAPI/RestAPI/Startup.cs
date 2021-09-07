@@ -15,6 +15,7 @@ using Persistence.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace RestAPI
@@ -53,7 +54,12 @@ namespace RestAPI
             //SAME EVEN MORE SIMPLIFIED (PERSITENCE SERVICE EXTENSION)
             services.AddPersistence();
 
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                options.JsonSerializerOptions.IgnoreNullValues = true;
+            });
+
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "RestAPI", Version = "v1" }); });
         }
 
