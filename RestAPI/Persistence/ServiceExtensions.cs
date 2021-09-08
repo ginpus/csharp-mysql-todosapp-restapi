@@ -16,6 +16,7 @@ namespace Persistence
     {
         public static IServiceCollection AddPersistence(this IServiceCollection services)
         {
+            // required for MySQL to work with GUID type
             SqlMapper.AddTypeHandler(new MySqlGuidTypeHandler());
             SqlMapper.RemoveTypeMap(typeof(Guid));
             SqlMapper.RemoveTypeMap(typeof(Guid?));

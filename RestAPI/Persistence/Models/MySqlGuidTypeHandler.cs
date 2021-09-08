@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Persistence.Models
 {
+    // required for MySQL to work with GUID type
     public class MySqlGuidTypeHandler : SqlMapper.TypeHandler<Guid>
     {
         public override void SetValue(IDbDataParameter parameter, Guid guid)

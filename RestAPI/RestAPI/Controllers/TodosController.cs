@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 
 namespace RestAPI.Controllers
 {
-    [ApiController]
+    [ApiController] // adds some functionality which we do not need to take care in code
+    [Route("todos")] // all methods will use this route as a base
     public class TodosController : ControllerBase
     {
         private readonly ITodosRepository _todosRepository;
@@ -21,7 +22,6 @@ namespace RestAPI.Controllers
         }
 
         [HttpGet]
-        [Route("todos")]
         public async Task<IEnumerable<TodoItemDto>> GetTodos() // Gauti visus TodoItems
         {
             var todos = (await _todosRepository.GetAllAsync())
@@ -35,22 +35,7 @@ namespace RestAPI.Controllers
             //return todosDto;
         }
 
-        [HttpGet]
-        [Route("todos/{todoId}")]
-        public async Task<ActionResult<TodoItemDto>> GetTodoItemByIdAsync(Guid todoId) // Gauti konkretų TodoItem
-        {
-            var todo = await _todosRepository.GetTodoItemByIdAsync(todoId);
-
-            if (todo == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(todo.AsDto());
-        }
-
         [HttpPost]
-        [Route("todos")]
         public async Task<ActionResult<TodoItemDto>> AddTodo(AddTodoDto todoDto) // Pridėti TodoItem
         {
             var todoItem = new TodoItem
@@ -65,41 +50,67 @@ namespace RestAPI.Controllers
 
             await _todosRepository.SaveAsync(todoItem);
 
-            return todoItem.AsDto();
-            //return CreatedAtAction(nameof(GetTodoItemByIdAsync), new { id = todoItem.Id }, todoItem.AsDto()); // Returns exception "No route matches the supplied values."
+            //could be used and should work:
+            //await _todosRepository.SaveOrUpdate(todoItem);
+
+            //return todoItem.AsDto();
+            return CreatedAtAction(nameof(GetTodoItemByIdAsync), new { Id = todoItem.Id.ToString("N") }, todoItem.AsDto());
+        }
+
+        [HttpGet]
+        [Route("{todoId}")]
+        public async Task<ActionResult<TodoItemDto>> GetTodoItemByIdAsync(Guid todoId) // Gauti konkretų TodoItem
+        {
+            var todo = await _todosRepository.GetTodoItemByIdAsync(todoId);
+
+            if (todo == null)
+            {
+                return NotFound($"Todo item with specified id : `{todoId}` does not exist");
+            }
+
+            return Ok(todo.AsDto());
         }
 
         [HttpPut]
-        [Route("todos/{todoId}")]
-        public async Task<ActionResult<UpdateTodoDto>> UpdateTodo(Guid todoId, UpdateTodoDto todo)
+        [Route("{todoId}")]
+        public async Task<ActionResult<TodoItemDto>> UpdateTodo(Guid todoId, UpdateTodoDto todo)
         {
             if (todo is null)
             {
                 return BadRequest();
             }
 
-            var todoToUpdate = _todosRepository.GetTodoItemByIdAsync(todoId);
+            var todoToUpdate = await _todosRepository.GetTodoItemByIdAsync(todoId);
 
             if (todoToUpdate is null)
             {
-                return NotFound();
+                return NotFound($"Todo item with specified id : `{todoId}` does not exist");
             }
 
-            var todoReveresed = new UpdateTodo
-            {
-                Title = todo.Title,
-                Description = todo.Description,
-                Difficulty = todo.Difficulty,
-                IsDone = todo.IsDone
-            };
+            todoToUpdate.Title = todo.Title;
+            todoToUpdate.Description = todo.Description;
+            todoToUpdate.Difficulty = todo.Difficulty;
+            todoToUpdate.IsDone = todo.IsDone;
 
-            var updatedTodo = await _todosRepository.EditAsync(todoId, todoReveresed);
+            await _todosRepository.SaveOrUpdate(todoToUpdate);
 
-            return todoReveresed.AsDto();
+            return todoToUpdate.AsDto();
+
+            /*            var todoReveresed = new UpdateTodo
+                        {
+                            Title = todo.Title,
+                            Description = todo.Description,
+                            Difficulty = todo.Difficulty,
+                            IsDone = todo.IsDone
+                        };
+
+                        await _todosRepository.EditAsync(todoId, todoReveresed);
+
+                        return todoReveresed.AsDto();*/
         }
 
         [HttpDelete]
-        [Route("todos/{todoId}")]
+        [Route("{todoId}")]
         public async Task<IActionResult> DeleteTodo(Guid todoId)
         {
             var todoToUpdate = _todosRepository.GetTodoItemByIdAsync(todoId);
