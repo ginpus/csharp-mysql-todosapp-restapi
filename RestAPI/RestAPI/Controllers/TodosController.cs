@@ -54,7 +54,7 @@ namespace RestAPI.Controllers
             //await _todosRepository.SaveOrUpdate(todoItem);
 
             //return todoItem.AsDto();
-            return CreatedAtAction(nameof(GetTodoItemByIdAsync), new { Id = todoItem.Id.ToString("N") }, todoItem.AsDto());
+            return CreatedAtAction(nameof(GetTodoItemByIdAsync), new { Id = todoItem.Id }, todoItem.AsDto());
         }
 
         [HttpGet]
@@ -107,6 +107,29 @@ namespace RestAPI.Controllers
                         await _todosRepository.EditAsync(todoId, todoReveresed);
 
                         return todoReveresed.AsDto();*/
+        }
+
+        [HttpPut]
+        [Route("{todoId}/status")]
+        public async Task<ActionResult<TodoItemDto>> UpdateTodoStatus(Guid todoId, UpdateTodoStatusDto todo)
+        {
+            if (todo is null)
+            {
+                return BadRequest();
+            }
+
+            var todoToUpdate = await _todosRepository.GetTodoItemByIdAsync(todoId);
+
+            if (todoToUpdate is null)
+            {
+                return NotFound($"Todo item with specified id : `{todoId}` does not exist");
+            }
+
+            todoToUpdate.IsDone = todo.IsDone;
+
+            await _todosRepository.SaveOrUpdate(todoToUpdate);
+
+            return todoToUpdate.AsDto();
         }
 
         [HttpDelete]
