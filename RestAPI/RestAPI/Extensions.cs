@@ -28,8 +28,8 @@ namespace RestAPI
             {
                 Title = todoItem.Title,
                 Description = todoItem.Description,
-                Difficulty = todoItem.Difficulty,
-                IsDone = todoItem.IsDone
+                Difficulty = todoItem.Difficulty/*,
+                IsDone = todoItem.IsDone*/
             };
         }
     }

@@ -90,7 +90,7 @@ namespace RestAPI.Controllers
             todoToUpdate.Title = todo.Title;
             todoToUpdate.Description = todo.Description;
             todoToUpdate.Difficulty = todo.Difficulty;
-            todoToUpdate.IsDone = todo.IsDone;
+            /*            todoToUpdate.IsDone = todo.IsDone;*/
 
             await _todosRepository.SaveOrUpdate(todoToUpdate);
 

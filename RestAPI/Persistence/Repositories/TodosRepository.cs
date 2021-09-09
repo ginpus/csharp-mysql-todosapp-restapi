@@ -39,15 +39,16 @@ namespace Persistence.Repositories
 
         public async Task<int> EditAsync(Guid id, UpdateTodo todo)
         {
-            var sqlUpdate = $"UPDATE {TableName} SET title = @title, description = @description, difficulty = @difficulty, isdone = @isdone  where id = @id";
+            //var sqlUpdate = $"UPDATE {TableName} SET title = @title, description = @description, difficulty = @difficulty, isdone = @isdone  where id = @id";
+            var sqlUpdate = $"UPDATE {TableName} SET title = @title, description = @description, difficulty = @difficulty  where id = @id";
 
             var rowsAffected = await _sqlClient.ExecuteAsync(sqlUpdate, new
             {
                 id = id,
                 title = todo.Title,
                 description = todo.Description,
-                difficulty = todo.Difficulty.ToString(),
-                isdone = todo.IsDone
+                difficulty = todo.Difficulty.ToString()/*,
+                isdone = todo.IsDone*/
             });
             return rowsAffected;
         }

@@ -18,7 +18,7 @@ namespace Persistence.Models
         [Required]
         public Difficulty Difficulty { get; set; }
 
-        [Required]
-        public bool IsDone { get; set; }
+        /*        [Required]
+                public bool IsDone { get; set; }*/
     }
 }
