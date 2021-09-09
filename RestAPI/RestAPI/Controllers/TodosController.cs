@@ -53,8 +53,8 @@ namespace RestAPI.Controllers
             //could be used and should work:
             //await _todosRepository.SaveOrUpdate(todoItem);
 
-            //return todoItem.AsDto();
-            return CreatedAtAction(nameof(GetTodoItemByIdAsync), new { Id = todoItem.Id }, todoItem.AsDto());
+            return todoItem.AsDto();
+            //return CreatedAtAction(nameof(GetTodoItemByIdAsync), new { Id = todoItem.Id }, todoItem.AsDto());
         }
 
         [HttpGet]
