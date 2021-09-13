@@ -109,7 +109,7 @@ namespace RestAPI.Controllers
                         return todoReveresed.AsDto();*/
         }
 
-        [HttpPut]
+        [HttpPatch]
         [Route("{todoId}/status")]
         public async Task<ActionResult<TodoItemDto>> UpdateTodoStatus(Guid todoId, UpdateTodoStatusDto todo)
         {
