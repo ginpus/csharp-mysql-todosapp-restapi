@@ -32,33 +32,17 @@ namespace RestAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            /*            var connectionStringBuilder = new MySqlConnectionStringBuilder();
-
-                        connectionStringBuilder.Server = "localhost";
-                        connectionStringBuilder.Port = 3306;
-                        connectionStringBuilder.UserID = "test";
-                        connectionStringBuilder.Password = "test";
-                        connectionStringBuilder.Database = "todosdb";
-
-                        var connectionString = connectionStringBuilder.GetConnectionString(true);
-
-                        services.AddTransient<ISqlClient>(_ => new SqlClient(connectionString));*/
-
-            //services.AddSingleton<ITodosRepository, TodosRepository>();
-
-            //SAME SIMPLIFIED
-            //services.AddSqlClient();
-
-            //services.AddRepositories();
-
-            //SAME EVEN MORE SIMPLIFIED (PERSITENCE SERVICE EXTENSION)
-            services.AddPersistence();
+            //Allows to receive value from JSON object "ConnectionStrings" from appsettings.json file. [] brackets allows to receive a value from inside JSON property of corresponding name
+            var connectionString = Configuration.GetSection("ConnectionStrings")["SqlConnectionString"];
+            var valueToChange = Configuration.GetSection("ConnectionStrings")["SomethingToBeChangedWithoutCodeChange"];
 
             services.AddControllers().AddJsonOptions(options => // required to represnet ENUM as string value (not as number)
             {
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 options.JsonSerializerOptions.IgnoreNullValues = true;
             });
+
+            services.AddPersistence(Configuration);
 
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "RestAPI", Version = "v1" }); });
 

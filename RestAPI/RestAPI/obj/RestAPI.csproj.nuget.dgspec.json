@@ -110,6 +110,10 @@
               "target": "Package",
               "version": "[2.0.90, )"
             },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
               "version": "[5.0.2, )"
@@ -185,6 +189,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
             "MySql.Data": {
               "target": "Package",
               "version": "[8.0.26, )"

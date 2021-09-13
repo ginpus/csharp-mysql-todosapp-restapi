@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "5nj1IdKWuWgWGsgQ5BMz4YpKB7GPuFKqQUCRAQ3ZDAJBb3RTxWcrmPzc5gCHrdosFpuHiM8/Ho2Vhe9jpZLXLA==",
+  "dgSpecHash": "0SoRuMPDrphSdh2rC4cLZqKKc3TgO+249fGlHIzuqMvPvBMO/u9fSXb9c62tiZlsCsX/3f/+pQlzl9gs3xsBOw==",
   "success": true,
   "projectFilePath": "F:\\Desktop\\dotNET\\C#\\8.31\\csharp-mysql-todosapp-restapi\\RestAPI\\Persistence\\Persistence.csproj",
   "expectedPackageFiles": [
@@ -10,8 +10,11 @@
     "C:\\Users\\ginta\\.nuget\\packages\\k4os.compression.lz4\\1.1.11\\k4os.compression.lz4.1.1.11.nupkg.sha512",
     "C:\\Users\\ginta\\.nuget\\packages\\k4os.compression.lz4.streams\\1.1.11\\k4os.compression.lz4.streams.1.1.11.nupkg.sha512",
     "C:\\Users\\ginta\\.nuget\\packages\\k4os.hash.xxhash\\1.0.6\\k4os.hash.xxhash.1.0.6.nupkg.sha512",
+    "C:\\Users\\ginta\\.nuget\\packages\\microsoft.extensions.configuration\\5.0.0\\microsoft.extensions.configuration.5.0.0.nupkg.sha512",
+    "C:\\Users\\ginta\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\5.0.0\\microsoft.extensions.configuration.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\ginta\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\5.0.2\\microsoft.extensions.dependencyinjection.5.0.2.nupkg.sha512",
     "C:\\Users\\ginta\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\ginta\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512",
     "C:\\Users\\ginta\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\ginta\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\ginta\\.nuget\\packages\\mysql.data\\8.0.26\\mysql.data.8.0.26.nupkg.sha512",
