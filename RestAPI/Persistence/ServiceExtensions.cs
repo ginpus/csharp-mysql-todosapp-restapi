@@ -49,6 +49,9 @@ namespace Persistence
 
             var connectionString = configuration.GetSection("ConnectionStrings")["SqlConnectionString"];
 
+            //should do the same:
+            // var connectionString = configuration.GetConnectionString("SqlConnectionString");
+
             return services.AddTransient<ISqlClient>(_ => new SqlClient(connectionString));
         }
     }
