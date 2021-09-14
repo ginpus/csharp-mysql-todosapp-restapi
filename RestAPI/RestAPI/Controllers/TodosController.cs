@@ -7,6 +7,7 @@ using RestAPI.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace RestAPI.Controllers
@@ -26,7 +27,7 @@ namespace RestAPI.Controllers
         [ApiKey]
         public async Task<IEnumerable<TodoItemDto>> GetTodos() // Gauti visus TodoItems
         {
-            //var header = Request.Headers["ApiKey"].FirstOrDefault();
+            var userId = (Guid)HttpContext.Items["userId"];
 
             var todos = (await _todosRepository.GetAllAsync())
                         .Select(todoItem => todoItem.AsDto());
@@ -151,5 +152,13 @@ namespace RestAPI.Controllers
 
             return NoContent();
         }
+
+        /*        private string GenerateApiKey()
+                {
+                    var key = new byte[32];
+                    using (var generator = RandomNumberGenerator.Create())
+                        generator.GetBytes(key);
+                    return Convert.ToBase64String(key);
+                }*/
     }
 }

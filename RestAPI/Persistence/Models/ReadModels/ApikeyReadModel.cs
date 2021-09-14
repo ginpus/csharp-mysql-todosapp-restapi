@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Persistence.Models.ReadModels
 {
-    internal class ApikeyReadModel
+    public class ApikeyReadModel
     {
         public Guid Id { get; set; }
 

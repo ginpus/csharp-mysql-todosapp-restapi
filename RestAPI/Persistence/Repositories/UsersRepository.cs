@@ -7,15 +7,27 @@ using System.Threading.Tasks;
 
 namespace Persistence.Repositories
 {
-    public class UsersRepository : IUserRepository
+    public class UsersRepository : IUsersRepository
     {
-        private readonly Dictionry<string, ApikeyReadModel> _apiKeys;
+        private readonly Dictionary<string, ApikeyReadModel> _apiKeys;
 
-        public UserRepository()
+        public UsersRepository() // temporary fake entry
         {
-            _apiKeys = new Dictionary<string, ApikeyReadModel>
+            _apiKeys = new Dictionary<string, ApikeyReadModel> {
+                {"somerandomidwhichcanbetreatedasapikey", new ApikeyReadModel
+                {
+                    Id = Guid.NewGuid(),
+                    Key = null,
+                    UserId = default,
+                    IsActive = false,
+                    DateCreated = default
+                } }
+            };
         }
 
-        public ApikeyReadModel GetApiKey { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public ApikeyReadModel GetApiKey(string key)
+        {
+            return _apiKeys[key];
+        }
     }
 }
