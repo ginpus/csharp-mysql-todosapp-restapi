@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Persistence.Models;
 using Persistence.Repositories;
+using RestAPI.Attributes;
 using RestAPI.Dtos;
 using System;
 using System.Collections.Generic;
@@ -22,8 +23,11 @@ namespace RestAPI.Controllers
         }
 
         [HttpGet]
+        [ApiKey]
         public async Task<IEnumerable<TodoItemDto>> GetTodos() // Gauti visus TodoItems
         {
+            //var header = Request.Headers["ApiKey"].FirstOrDefault();
+
             var todos = (await _todosRepository.GetAllAsync())
                         .Select(todoItem => todoItem.AsDto());
 
