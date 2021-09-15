@@ -17,5 +17,10 @@ namespace Persistence.Models.ReadModels
         public bool IsActive { get; set; }
 
         public DateTime DateCreated { get; set; }
+
+        public override string ToString()
+        {
+            return $"Id: {Id}; Key: {Key}; UserId: {UserId}; IsActive: {IsActive}; DateCreated: {DateCreated}";
+        }
     }
 }

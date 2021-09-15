@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace RestAPI.Attributes
 {
@@ -13,8 +14,6 @@ namespace RestAPI.Attributes
     {
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
-            //context.HttpContext.Request.
-            //var todoId = (Guid)context.ActionArguments["Id"];
             var key = context.HttpContext.Request.Headers["ApiKey"].SingleOrDefault(); // this name of the header will need to be included
 
             if (string.IsNullOrEmpty(key))

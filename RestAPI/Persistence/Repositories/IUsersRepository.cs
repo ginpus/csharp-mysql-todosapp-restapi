@@ -1,4 +1,5 @@
-﻿using Persistence.Models.ReadModels;
+﻿using Persistence.Models;
+using Persistence.Models.ReadModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,7 @@ namespace Persistence.Repositories
     public interface IUsersRepository
     {
         ApikeyReadModel GetApiKey(string key);
+
+        //void GenerateApiKey(User user);
     }
 }
