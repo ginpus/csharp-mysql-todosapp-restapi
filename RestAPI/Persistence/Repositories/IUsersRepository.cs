@@ -14,6 +14,6 @@ namespace Persistence.Repositories
 
         Task<ApikeyReadModel> GetApiKeyAsync(string apikey);
 
-        // void GenerateApiKey(User user);
+        Task<int> GenerateApiKey(User user);
     }
 }

@@ -14,5 +14,6 @@ namespace RestAPI.Dtos
         public Difficulty Difficulty { get; set; }
         public DateTime Date_Created { get; set; }
         public bool IsDone { get; set; }
+        public Guid UserId { get; set; }
     }
 }

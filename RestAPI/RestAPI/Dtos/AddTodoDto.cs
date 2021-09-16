@@ -17,5 +17,8 @@ namespace RestAPI.Dtos
 
         [Required]
         public Difficulty Difficulty { get; set; }
+
+        [Required]
+        public Guid UserId { get; set; }
     }
 }

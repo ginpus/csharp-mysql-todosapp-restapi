@@ -147,13 +147,5 @@ namespace RestAPI.Controllers
 
             return NoContent();
         }
-
-        /*        private string GenerateApiKey()
-                {
-                    var key = new byte[32];
-                    using (var generator = RandomNumberGenerator.Create())
-                        generator.GetBytes(key);
-                    return Convert.ToBase64String(key);
-                }*/
     }
 }

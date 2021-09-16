@@ -4,6 +4,7 @@ using Persistence.Models.ReadModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -42,18 +43,24 @@ namespace Persistence.Repositories
             return apiKey;
         }
 
-        /*        public async Task<int> GenerateApiKey(User user)
-                {
-                    var sqlInsert = @$"INSERT INTO {ApiKeysTable} (id, apikey, userid, isactive, datecreated) VALUES(@id, @apikey, @userid, @isactive, @datecreated)";
-                    var rowsAffected = _sqlClient.ExecuteAsync(sqlInsert, new
-                    {
-                        id = Guid.NewGuid(),
-                        apikey = user.UserName,
-                        userid = user.Password,
-                        isactive = true,
-                        datecreated = user.DateCreated
-                    }); ;
-                    return await rowsAffected;
-                }*/
+        public async Task<int> GenerateApiKey(User user)
+        {
+            var key = new byte[32];
+            using (var generator = RandomNumberGenerator.Create())
+                generator.GetBytes(key);
+            var newApiKey = Convert.ToBase64String(key);
+
+            var sqlInsert = @$"INSERT INTO {ApiKeysTable} (id, apikey, userid, isactive, datecreated) VALUES(@id, @apikey, @userid, @isactive, @datecreated)";
+            var rowsAffected = _sqlClient.ExecuteAsync(sqlInsert, new
+            {
+                id = Guid.NewGuid(),
+                apikey = newApiKey,
+                userid = user.UserId,
+                isactive = true,
+                datecreated = user.DateCreated
+            });
+
+            return await rowsAffected;
+        }
     }
 }
