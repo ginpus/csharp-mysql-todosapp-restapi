@@ -10,8 +10,10 @@ namespace Persistence.Repositories
 {
     public interface IUsersRepository
     {
-        ApikeyReadModel GetApiKey(string key);
+        Task<IEnumerable<ApikeyReadModel>> GetAllApiKeyAsync();
 
-        //void GenerateApiKey(User user);
+        Task<ApikeyReadModel> GetApiKeyAsync(string apikey);
+
+        // void GenerateApiKey(User user);
     }
 }

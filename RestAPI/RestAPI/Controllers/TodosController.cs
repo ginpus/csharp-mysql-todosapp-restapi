@@ -29,15 +29,10 @@ namespace RestAPI.Controllers
         {
             var userId = (Guid)HttpContext.Items["userId"];
 
-            var todos = (await _todosRepository.GetAllAsync())
+            var todos = (await _todosRepository.GetTodoItemByUserIdAsync(userId))
                         .Select(todoItem => todoItem.AsDto());
 
             return todos;
-
-            ////same as:
-            //var todos = await _todosRepository.GetAllAsync();
-            //var todosDto = todos.Select(todoItem => todoItem.AsDto());
-            //return todosDto;
         }
 
         [HttpPost]

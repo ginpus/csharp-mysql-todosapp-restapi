@@ -70,6 +70,16 @@ namespace Persistence.Repositories
             });
         }
 
+        public async Task<IEnumerable<TodoItem>> GetTodoItemByUserIdAsync(Guid userid)
+        {
+            var sqlSelect = $"SELECT id, title, description, difficulty, date_created, isdone FROM {TableName} where userid = @userid ORDER BY date_created desc";
+
+            return await _sqlClient.QueryAsync<TodoItem>(sqlSelect, new
+            {
+                userid = userid
+            });
+        }
+
         public async Task<int> SaveAsync(TodoItem todoItem)
         {
             var sqlInsert = @$"INSERT INTO {TableName} (id, title, description, difficulty, date_created, isdone) VALUES(@id, @title, @description, @difficulty, @date_created, @isdone)";

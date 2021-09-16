@@ -11,59 +11,35 @@ namespace Persistence.Repositories
 {
     public class UsersRepository : IUsersRepository
     {
-        /*        private const string UsersTable = "users";
-                private const string ApiKeysTable = "apikeys";
-                private readonly ISqlClient _sqlClient;
+        private const string UsersTable = "users";
+        private const string ApiKeysTable = "apikeys";
 
-                public UsersRepository(ISqlClient sqlClient)
-                {
-                    _sqlClient = sqlClient;
-                }
+        private readonly ISqlClient _sqlClient;
 
-                public async Task<int> CreateUserAsync(User user)
-                {
-                    var sqlInsert = @$"INSERT INTO {UsersTable} (userid, username, password, datecreated) VALUES(@userid, @username, @password, @datecreated)";
-                    var rowsAffected = _sqlClient.ExecuteAsync(sqlInsert, new
-                    {
-                        userid = user.UserId,
-                        username = user.UserName,
-                        password = user.Password,
-                        datecreated = user.DateCreated
-                    }); ;
-                    return await rowsAffected;
-                }*/
-
-        private readonly Dictionary<string, ApikeyReadModel> _apiKeys;
-
-        public UsersRepository() // temporary fake entry
+        public UsersRepository(ISqlClient sqlClient)
         {
-            _apiKeys = new Dictionary<string, ApikeyReadModel> {
-                {"somerandomidwhichcanbetreatedasapikey", new ApikeyReadModel
-                    {
-                    Id = Guid.NewGuid(),
-                    Key = null,
-                    UserId = default,
-                    IsActive = true,
-                    DateCreated = default
-                    }
-                },
-                {"theotherapikey", new ApikeyReadModel
-                    {
-                    Id = Guid.NewGuid(),
-                    Key = null,
-                    UserId = default,
-                    IsActive = true,
-                    DateCreated = default
-                    }
-                }
-            };
+            _sqlClient = sqlClient;
         }
 
-        public ApikeyReadModel GetApiKey(string key)
+        public async Task<IEnumerable<ApikeyReadModel>> GetAllApiKeyAsync()
         {
-            Console.WriteLine(_apiKeys[key].ToString());
-            Console.WriteLine(key);
-            return _apiKeys[key];
+            var sqlSelect = $"SELECT id, apikey, userid, isactive, datecreated FROM {ApiKeysTable}";
+
+            var allApiKeys = await _sqlClient.QueryAsync<ApikeyReadModel>(sqlSelect);
+
+            return allApiKeys;
+        }
+
+        public async Task<ApikeyReadModel> GetApiKeyAsync(string apikey)
+        {
+            var sqlSelect = $"SELECT id, apikey, userid, isactive, datecreated FROM {ApiKeysTable} WHERE apikey = @apikey";
+
+            var apiKey = await _sqlClient.QueryFirstOrDefaultAsync<ApikeyReadModel>(sqlSelect, new
+            {
+                apikey = apikey
+            });
+
+            return apiKey;
         }
 
         /*        public async Task<int> GenerateApiKey(User user)

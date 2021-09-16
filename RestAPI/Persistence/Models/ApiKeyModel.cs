@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Persistence.Models.ReadModels
+namespace Persistence.Models
 {
-    public class ApikeyReadModel
+    public class ApiKeyModel
     {
         public Guid Id { get; set; }
 
@@ -20,7 +20,7 @@ namespace Persistence.Models.ReadModels
 
         public override string ToString()
         {
-            return $"Id: {Id}; ApiKey: {ApiKey}; UserId: {UserId}; IsActive: {IsActive}; DateCreated: {DateCreated}";
+            return $"Id: {Id}; Key: {ApiKey}; UserId: {UserId}; IsActive: {IsActive}; DateCreated: {DateCreated}";
         }
     }
 }

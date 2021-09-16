@@ -25,7 +25,9 @@ namespace RestAPI.Attributes
 
             var usersRepository = context.HttpContext.RequestServices.GetService<IUsersRepository>();
 
-            var apiKey = usersRepository.GetApiKey(key);
+            //var apiKeys = await usersRepository.GetAllApiKeyAsync();
+
+            var apiKey = await usersRepository.GetApiKeyAsync(key);
 
             if (apiKey is null)
             {
@@ -42,6 +44,8 @@ namespace RestAPI.Attributes
             }
 
             context.HttpContext.Items.Add("userId", apiKey.UserId);
+
+            Console.WriteLine("End of filter");
 
             await next(); // jumps to the action OR to the other filter!
         }
