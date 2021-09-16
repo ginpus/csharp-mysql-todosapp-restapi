@@ -11,17 +11,17 @@ namespace Persistence.Repositories
     {
         Task<IEnumerable<TodoItem>> GetAllAsync();
 
-        Task<TodoItem> GetTodoItemByIdAsync(Guid id);
+        Task<TodoItem> GetTodoItemByIdAsync(Guid id, Guid userid);
 
         Task<IEnumerable<TodoItem>> GetTodoItemByUserIdAsync(Guid userid);
 
         Task<int> SaveAsync(TodoItem todoItem);
 
-        Task<int> EditAsync(Guid id, UpdateTodo todo);
+        Task<int> EditAsync(Guid id, UpdateTodo todo, Guid userid);
 
-        Task<int> DeleteAsync(Guid id);
+        Task<int> DeleteAsync(Guid id, Guid userid);
 
-        Task<int> DeleteAllAsync();
+        Task<int> DeleteAllAsync(Guid userid);
 
         Task<int> SaveOrUpdate(TodoItem model);
     }

@@ -43,8 +43,6 @@ namespace RestAPI.Attributes
 
             context.HttpContext.Items.Add("userId", apiKey.UserId);
 
-            Console.WriteLine("End of filter");
-
             await next(); // jumps to the action OR to the other filter!
         }
     }

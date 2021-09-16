@@ -36,8 +36,13 @@ namespace RestAPI.Controllers
         }
 
         [HttpPost]
+        [ApiKey]
         public async Task<ActionResult<TodoItemDto>> AddTodo(AddTodoDto todoDto) // Pridėti TodoItem
         {
+            var userId = (Guid)HttpContext.Items["userId"];
+
+            Console.WriteLine(userId);
+
             var todoItem = new TodoItem
             {
                 Id = Guid.NewGuid(),
@@ -45,7 +50,8 @@ namespace RestAPI.Controllers
                 Description = todoDto.Description,
                 Difficulty = todoDto.Difficulty,
                 IsDone = false,
-                Date_Created = DateTime.Now
+                Date_Created = DateTime.Now,
+                UserId = userId
             };
 
             await _todosRepository.SaveAsync(todoItem);
@@ -59,9 +65,12 @@ namespace RestAPI.Controllers
 
         [HttpGet]
         [Route("{todoId}")]
+        [ApiKey]
         public async Task<ActionResult<TodoItemDto>> GetTodoItemByIdAsync(Guid todoId) // Gauti konkretų TodoItem
         {
-            var todo = await _todosRepository.GetTodoItemByIdAsync(todoId);
+            var userId = (Guid)HttpContext.Items["userId"];
+
+            var todo = await _todosRepository.GetTodoItemByIdAsync(todoId, userId);
 
             if (todo == null)
             {
@@ -73,14 +82,16 @@ namespace RestAPI.Controllers
 
         [HttpPut]
         [Route("{todoId}")]
+        [ApiKey]
         public async Task<ActionResult<TodoItemDto>> UpdateTodo(Guid todoId, UpdateTodoDto todo)
         {
+            var userId = (Guid)HttpContext.Items["userId"];
             if (todo is null)
             {
                 return BadRequest();
             }
 
-            var todoToUpdate = await _todosRepository.GetTodoItemByIdAsync(todoId);
+            var todoToUpdate = await _todosRepository.GetTodoItemByIdAsync(todoId, userId);
 
             if (todoToUpdate is null)
             {
@@ -90,35 +101,25 @@ namespace RestAPI.Controllers
             todoToUpdate.Title = todo.Title;
             todoToUpdate.Description = todo.Description;
             todoToUpdate.Difficulty = todo.Difficulty;
-            /*            todoToUpdate.IsDone = todo.IsDone;*/
 
             await _todosRepository.SaveOrUpdate(todoToUpdate);
 
             return todoToUpdate.AsDto();
-
-            /*            var todoReveresed = new UpdateTodo
-                        {
-                            Title = todo.Title,
-                            Description = todo.Description,
-                            Difficulty = todo.Difficulty,
-                            IsDone = todo.IsDone
-                        };
-
-                        await _todosRepository.EditAsync(todoId, todoReveresed);
-
-                        return todoReveresed.AsDto();*/
         }
 
         [HttpPatch]
         [Route("{todoId}/status")]
+        [ApiKey]
         public async Task<ActionResult<TodoItemDto>> UpdateTodoStatus(Guid todoId, UpdateTodoStatusDto todo)
         {
+            var userId = (Guid)HttpContext.Items["userId"];
+
             if (todo is null)
             {
                 return BadRequest();
             }
 
-            var todoToUpdate = await _todosRepository.GetTodoItemByIdAsync(todoId);
+            var todoToUpdate = await _todosRepository.GetTodoItemByIdAsync(todoId, userId);
 
             if (todoToUpdate is null)
             {
@@ -134,16 +135,19 @@ namespace RestAPI.Controllers
 
         [HttpDelete]
         [Route("{todoId}")]
+        [ApiKey]
         public async Task<IActionResult> DeleteTodo(Guid todoId)
         {
-            var todoToUpdate = _todosRepository.GetTodoItemByIdAsync(todoId);
+            var userId = (Guid)HttpContext.Items["userId"];
+
+            var todoToUpdate = _todosRepository.GetTodoItemByIdAsync(todoId, userId);
 
             if (todoToUpdate is null)
             {
                 return NotFound();
             }
 
-            await _todosRepository.DeleteAsync(todoId);
+            await _todosRepository.DeleteAsync(todoId, userId);
 
             return NoContent();
         }

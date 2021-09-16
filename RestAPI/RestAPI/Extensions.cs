@@ -18,7 +18,8 @@ namespace RestAPI
                 Description = todoItem.Description,
                 Difficulty = todoItem.Difficulty,
                 IsDone = todoItem.IsDone,
-                Date_Created = todoItem.Date_Created
+                Date_Created = todoItem.Date_Created,
+                UserId = todoItem.UserId
             };
         }
 
