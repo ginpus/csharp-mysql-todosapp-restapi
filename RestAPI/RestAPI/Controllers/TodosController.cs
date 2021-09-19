@@ -131,7 +131,8 @@ namespace RestAPI.Controllers
                     ApiKey = "noapikey",
                     UserId = default,
                     DateCreated = default,
-                    IsActive = false
+                    IsActive = false,
+                    ExpirationDate = default
                 };
                 return apiKey.AsDto();
             }

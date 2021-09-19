@@ -18,6 +18,8 @@ namespace Persistence.Models
 
         public DateTime DateCreated { get; set; }
 
+        public DateTime ExpirationDate { get; set; }
+
         public override string ToString()
         {
             return $"Id: {Id}; Key: {ApiKey}; UserId: {UserId}; IsActive: {IsActive}; DateCreated: {DateCreated}";

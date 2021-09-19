@@ -34,7 +34,7 @@ namespace RestAPI.Attributes
                 return;
             }
 
-            if (!apiKey.IsActive)
+            if (!apiKey.IsActive || apiKey.ExpirationDate < DateTime.Now)
             {
                 context.Result = new BadRequestObjectResult("Apikey expired");
 
