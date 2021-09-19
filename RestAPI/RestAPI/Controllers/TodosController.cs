@@ -82,27 +82,6 @@ namespace RestAPI.Controllers
         }
 
         [HttpPost]
-        [Route("usercreate")]
-        //[ApiKey] // as this is new user, API key does not exist at all
-        public async Task<ActionResult<UserDto>> CreateUser(AddUserDto user) // Useris gali susikurti account'ą
-        {
-            //var userId = (Guid)HttpContext.Items["userId"];
-
-            var newUser = new User
-            {
-                UserId = Guid.NewGuid(),
-                UserName = user.UserName,
-                Password = user.Password,
-                DateCreated = DateTime.Now
-            };
-
-            await _userRepository.CreateUserAysnc(newUser);
-
-            return newUser.AsDto();
-            //return CreatedAtAction(nameof(GetTodoItemByIdAsync), new { Id = todoItem.Id }, todoItem.AsDto());
-        }
-
-        [HttpPost]
         [Route("generateapikey")]
         //[ApiKey] // does not make sense, as new user will not have any API yet
         public async Task<ActionResult<ApiKeyDto>> GenerateApiKey(ReadUserDto user) // Useris gali susigeneruoti ApiKey

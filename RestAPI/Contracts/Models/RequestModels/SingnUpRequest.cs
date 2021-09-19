@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Persistence.Models.ReadModels
+namespace Contracts.Models.RequestModels
 {
-    public class UserCreateReadModel
+    public class SingnUpRequest
     {
         [Required]
         public string UserName { get; set; }
