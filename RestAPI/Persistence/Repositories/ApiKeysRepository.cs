@@ -1,4 +1,5 @@
-﻿using Persistence.Client;
+﻿using Contracts.Models.ResponseModels;
+using Persistence.Client;
 using Persistence.Models;
 using Persistence.Models.ReadModels;
 using System;
@@ -45,7 +46,7 @@ namespace Persistence.Repositories
             return apiKey;
         }
 
-        public async Task<ApiKeyModel> GenerateApiKeyAsync(Guid userId)
+        /*public async Task<ApiKeyModel> GenerateApiKeyAsync(Guid userId)
         {
             var key = new byte[32];
             using (var generator = RandomNumberGenerator.Create())
@@ -74,11 +75,11 @@ namespace Persistence.Repositories
             });
 
             return newApiKey;
-        }
+        }*/
 
-        public async Task<int> SaveApiKeyAsync(ApikeyReadModel apiKey)
+        public async Task<int> SaveApiKeyAsync(ApiKeyResponse apiKey)
         {
-            var sqlInsert = @$"INSERT INTO {ApiKeysTable} (id, apikey, userid, isactive, datecreated, expirationdate) VALUES(@id, @apikey, @userid, @isactive, @datecreated, @expiratondate)";
+            var sqlInsert = @$"INSERT INTO {ApiKeysTable} (id, apikey, userid, isactive, datecreated, expirationdate) VALUES(@id, @apikey, @userid, @isactive, @datecreated, @expirationdate)";
             var rowsAffected = await _sqlClient.ExecuteAsync(sqlInsert, apiKey);
 
             return rowsAffected;

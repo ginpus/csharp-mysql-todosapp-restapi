@@ -17,16 +17,11 @@ namespace RestAPI.Controllers
     [Route("auth")]
     public class AuthController : ControllerBase
     {
-        //private readonly ITodosRepository _todosRepository;
         private readonly IUsersRepository _userRepository;
 
-        private readonly IApiKeysRepository _apiKeysRepository;
-
-        public AuthController(IUsersRepository userRepository, IApiKeysRepository apiKeysRepository)
+        public AuthController(IUsersRepository userRepository)
         {
-            //_todosRepository = todosRepository;
             _userRepository = userRepository;
-            _apiKeysRepository = apiKeysRepository;
         }
 
         [HttpPost]

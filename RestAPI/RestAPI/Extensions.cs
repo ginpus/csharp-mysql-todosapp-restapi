@@ -1,4 +1,5 @@
-﻿using Persistence.Models;
+﻿using Contracts.Models.ResponseModels;
+using Persistence.Models;
 using RestAPI.Dtos;
 using System;
 using System.Collections.Generic;
@@ -45,9 +46,9 @@ namespace RestAPI
             };
         }
 
-        public static ApiKeyDto AsDto(this ApiKeyModel apiKey)
+        public static ApiKeyResponse AsDto(this ApiKeyModel apiKey)
         {
-            return new ApiKeyDto
+            return new ApiKeyResponse
             {
                 Id = apiKey.Id,
                 ApiKey = apiKey.ApiKey,

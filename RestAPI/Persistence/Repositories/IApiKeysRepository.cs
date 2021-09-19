@@ -1,4 +1,5 @@
-﻿using Persistence.Models;
+﻿using Contracts.Models.ResponseModels;
+using Persistence.Models;
 using Persistence.Models.ReadModels;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,9 @@ namespace Persistence.Repositories
 
         Task<ApikeyReadModel> GetApiKeyAsync(string apikey);
 
-        Task<ApiKeyModel> GenerateApiKeyAsync(Guid userId);
+        //Task<ApiKeyModel> GenerateApiKeyAsync(Guid userId);
 
-        Task<int> SaveApiKeyAsync(ApikeyReadModel apiKey);
+        Task<int> SaveApiKeyAsync(ApiKeyResponse apiKey);
 
         Task<int> UpdateIsActive(Guid apiKeyId, bool isActive);
     }
