@@ -46,36 +46,17 @@ namespace Persistence.Repositories
             return apiKey;
         }
 
-        /*public async Task<ApiKeyModel> GenerateApiKeyAsync(Guid userId)
+        public async Task<ApikeyReadModel> GetApiKeyByIdAsync(Guid apiKeyId)
         {
-            var key = new byte[32];
-            using (var generator = RandomNumberGenerator.Create())
-                generator.GetBytes(key);
-            var generatedApiKey = Convert.ToBase64String(key);
+            var sqlSelect = $"SELECT id, apikey, userid, isactive, datecreated, expirationdate FROM {ApiKeysTable} WHERE id = @apiKeyId";
 
-            var newApiKey = new ApiKeyModel
+            var apiKey = await _sqlClient.QuerySingleOrDefaultAsync<ApikeyReadModel>(sqlSelect, new
             {
-                Id = Guid.NewGuid(),
-                ApiKey = generatedApiKey.ToString(),
-                UserId = userId,
-                IsActive = true,
-                DateCreated = DateTime.Now,
-                ExpirationDate = DateTime.Now.AddHours(4.00)
-            };
-
-            var sqlInsert = @$"INSERT INTO {ApiKeysTable} (id, apikey, userid, isactive, datecreated, expirationdate) VALUES(@id, @apikey, @userid, @isactive, @datecreated, @expiratondate)";
-            var rowsAffected = await _sqlClient.ExecuteAsync(sqlInsert, new
-            {
-                id = newApiKey.Id,
-                apikey = newApiKey.ApiKey,
-                userid = newApiKey.UserId,
-                isactive = newApiKey.IsActive,
-                datecreated = newApiKey.DateCreated,
-                expiratondate = newApiKey.ExpirationDate
+                apiKeyId = apiKeyId
             });
 
-            return newApiKey;
-        }*/
+            return apiKey;
+        }
 
         public async Task<int> SaveApiKeyAsync(ApiKeyResponse apiKey)
         {

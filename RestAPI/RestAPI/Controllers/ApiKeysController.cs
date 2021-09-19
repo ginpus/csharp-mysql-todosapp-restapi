@@ -30,7 +30,7 @@ namespace RestAPI.Controllers
 
         [HttpGet]
         [ApiKey]
-        //[Route("apikey")]
+        [Route("getApiKeysByKey")]
         public async Task<IEnumerable<ApiKeyResponse>> GetAllApiKeysAsync() // Useris gali peržiūrėti savo ApiKeys
         {
             var userId = (Guid)HttpContext.Items["userId"];
@@ -41,8 +41,25 @@ namespace RestAPI.Controllers
             return apiKeys;
         }
 
+        [HttpGet]
+        [Route("getApiKeysCreds")]
+        public async Task<ActionResult<IEnumerable<ApiKeyResponse>>> GetAllApiKeysAsync(string userName, string password) // Useris gali peržiūrėti savo ApiKeys
+        {
+            var user = await _userRepository.GetUserAsync(userName, password);
+
+            if (user is null)
+            {
+                return BadRequest("Wrong username or password");
+            }
+
+            var apiKeys = (await _apiKeysRepository.GetAllApiKeyAsync(user.UserId))
+                        .Select(apiKey => apiKey.AsDto());
+
+            return Ok(apiKeys);
+        }
+
         [HttpPost]
-        public async Task<ActionResult<ApiKeyResponse>> CreateApiKey(ApiKeyRequest request)
+        public async Task<ActionResult<ApiKeyResponse>> CreateApiKey(ApiKeyRequest request) // Sukurti API key
         {
             var user = await _userRepository.GetUserAsync(request.UserName, request.Password);
 
@@ -69,6 +86,29 @@ namespace RestAPI.Controllers
             await _apiKeysRepository.SaveApiKeyAsync(newApiKey.AsDto());
 
             return newApiKey.AsDto();
+        }
+
+        [HttpPut]
+        [Route("{apiKeyId}/isActive")]
+        public async Task<ActionResult<ApiKeyResponse>> UpdateKeyStateAsync(Guid apiKeyId, UpdateApiKeyStateRequest request)
+        {
+            var apiKey = await _apiKeysRepository.GetApiKeyByIdAsync(apiKeyId);
+
+            if (apiKey is null)
+            {
+                return NotFound($"Api key with ID: '{apiKeyId}' does not exist");
+            }
+
+            await _apiKeysRepository.UpdateIsActive(apiKeyId, request.IsActive);
+
+            return new ApiKeyResponse { 
+            Id = apiKey.Id,
+            ApiKey = apiKey.ApiKey,
+            UserId = apiKey.UserId,
+            IsActive = request.IsActive,
+            DateCreated = apiKey.DateCreated,
+            ExpirationDate = apiKey.ExpirationDate
+            };
         }
     }
 }

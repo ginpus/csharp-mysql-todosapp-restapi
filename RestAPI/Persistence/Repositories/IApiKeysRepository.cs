@@ -15,6 +15,8 @@ namespace Persistence.Repositories
 
         Task<ApikeyReadModel> GetApiKeyAsync(string apikey);
 
+        Task<ApikeyReadModel> GetApiKeyByIdAsync(Guid apiKeyId);
+
         //Task<ApiKeyModel> GenerateApiKeyAsync(Guid userId);
 
         Task<int> SaveApiKeyAsync(ApiKeyResponse apiKey);
