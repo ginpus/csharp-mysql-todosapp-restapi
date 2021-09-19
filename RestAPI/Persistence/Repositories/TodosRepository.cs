@@ -18,61 +18,76 @@ namespace Persistence.Repositories
             _sqlClient = sqlClient;
         }
 
-        public async Task<int> DeleteAllAsync()
+        public async Task<int> DeleteAllAsync(Guid userid)
         {
-            var sqlDeleteAll = $"DELETE FROM {TableName}";
+            var sqlDeleteAll = $"DELETE FROM {TableName} WHERE userid = @userid";
 
-            var rowsAffected = await _sqlClient.ExecuteAsync(sqlDeleteAll);
-            return rowsAffected;
-        }
-
-        public async Task<int> DeleteAsync(Guid id)
-        {
-            var sqlDelete = $"DELETE FROM {TableName} WHERE id = @id";
-
-            var rowsAffected = await _sqlClient.ExecuteAsync(sqlDelete, new
+            var rowsAffected = await _sqlClient.ExecuteAsync(sqlDeleteAll, new
             {
-                id = id
+                userid = userid
             });
             return rowsAffected;
         }
 
-        public async Task<int> EditAsync(Guid id, UpdateTodo todo)
+        public async Task<int> DeleteAsync(Guid id, Guid userid)
+        {
+            var sqlDelete = $"DELETE FROM {TableName} WHERE id = @id and userid = @userid";
+
+            var rowsAffected = await _sqlClient.ExecuteAsync(sqlDelete, new
+            {
+                id = id,
+                userid = userid
+            });
+            return rowsAffected;
+        }
+
+        public async Task<int> EditAsync(Guid id, UpdateTodo todo, Guid userid)
         {
             //var sqlUpdate = $"UPDATE {TableName} SET title = @title, description = @description, difficulty = @difficulty, isdone = @isdone  where id = @id";
-            var sqlUpdate = $"UPDATE {TableName} SET title = @title, description = @description, difficulty = @difficulty  where id = @id";
+            var sqlUpdate = $"UPDATE {TableName} SET title = @title, description = @description, difficulty = @difficulty  where id = @id AND userid = @userid";
 
             var rowsAffected = await _sqlClient.ExecuteAsync(sqlUpdate, new
             {
                 id = id,
                 title = todo.Title,
                 description = todo.Description,
-                difficulty = todo.Difficulty.ToString()/*,
-                isdone = todo.IsDone*/
+                difficulty = todo.Difficulty.ToString(),
+                userid = userid
             });
             return rowsAffected;
         }
 
         public async Task<IEnumerable<TodoItem>> GetAllAsync()
         {
-            var sqlSelect = $"SELECT id, title, description, difficulty, date_created, isdone FROM {TableName} ORDER BY date_created desc";
+            var sqlSelect = $"SELECT id, title, description, difficulty, date_created, isdone, userid FROM {TableName} ORDER BY date_created desc";
 
             return await _sqlClient.QueryAsync<TodoItem>(sqlSelect);
         }
 
-        public async Task<TodoItem> GetTodoItemByIdAsync(Guid id)
+        public async Task<TodoItem> GetTodoItemByIdAsync(Guid id, Guid userid)
         {
-            var sqlSelect = $"SELECT id, title, description, difficulty, date_created, isdone FROM {TableName} where id = @id ORDER BY date_created desc";
+            var sqlSelect = $"SELECT id, title, description, difficulty, date_created, isdone, userid FROM {TableName} where id = @id AND userid = @userid ORDER BY date_created desc";
 
             return await _sqlClient.QueryFirstOrDefaultAsync<TodoItem>(sqlSelect, new
             {
-                id = id
+                id = id,
+                userid = userid
+            });
+        }
+
+        public async Task<IEnumerable<TodoItem>> GetTodoItemByUserIdAsync(Guid userid)
+        {
+            var sqlSelect = $"SELECT id, title, description, difficulty, date_created, isdone, userid FROM {TableName} where userid = @userid ORDER BY date_created desc";
+
+            return await _sqlClient.QueryAsync<TodoItem>(sqlSelect, new
+            {
+                userid = userid
             });
         }
 
         public async Task<int> SaveAsync(TodoItem todoItem)
         {
-            var sqlInsert = @$"INSERT INTO {TableName} (id, title, description, difficulty, date_created, isdone) VALUES(@id, @title, @description, @difficulty, @date_created, @isdone)";
+            var sqlInsert = @$"INSERT INTO {TableName} (id, title, description, difficulty, date_created, isdone, userid) VALUES(@id, @title, @description, @difficulty, @date_created, @isdone, @userid)";
             var rowsAffected = _sqlClient.ExecuteAsync(sqlInsert, new
             {
                 id = todoItem.Id,
@@ -80,14 +95,15 @@ namespace Persistence.Repositories
                 description = todoItem.Description,
                 difficulty = todoItem.Difficulty.ToString(),
                 date_created = todoItem.Date_Created,
-                isdone = todoItem.IsDone
-            }); ;
+                isdone = todoItem.IsDone,
+                userid = todoItem.UserId
+            });
             return await rowsAffected;
         }
 
         public async Task<int> SaveOrUpdate(TodoItem model)
         {
-            var sql = @$"INSERT INTO {TableName} (id, title, description, difficulty, date_created, isdone) VALUES(@id, @title, @description, @difficulty, @date_created, @isdone) ON DUPLICATE KEY UPDATE title = @title, description = @description, difficulty = @difficulty, isdone = @isdone";
+            var sql = @$"INSERT INTO {TableName} (id, title, description, difficulty, date_created, isdone, userid) VALUES(@id, @title, @description, @difficulty, @date_created, @isdone, @userid) ON DUPLICATE KEY UPDATE title = @title, description = @description, difficulty = @difficulty, isdone = @isdone, userid = @userid";
 
             return await _sqlClient.ExecuteAsync(sql, new
             {
@@ -96,7 +112,8 @@ namespace Persistence.Repositories
                 model.Description,
                 difficulty = model.Difficulty.ToString(),
                 model.Date_Created,
-                model.IsDone
+                model.IsDone,
+                model.UserId
             });
         }
     }

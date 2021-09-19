@@ -12,6 +12,7 @@ using MySql.Data.MySqlClient;
 using Persistence;
 using Persistence.Client;
 using Persistence.Repositories;
+using RestAPI.SwaggerSettings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +45,11 @@ namespace RestAPI
 
             services.AddPersistence(Configuration);
 
-            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "RestAPI", Version = "v1" }); });
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "RestAPI", Version = "v1" });
+                options.OperationFilter<AddHeaderParameter>();
+            });
 
             services.AddCors();
         }

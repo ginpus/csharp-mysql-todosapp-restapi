@@ -18,7 +18,8 @@ namespace RestAPI
                 Description = todoItem.Description,
                 Difficulty = todoItem.Difficulty,
                 IsDone = todoItem.IsDone,
-                Date_Created = todoItem.Date_Created
+                Date_Created = todoItem.Date_Created,
+                UserId = todoItem.UserId
             };
         }
 
@@ -30,6 +31,30 @@ namespace RestAPI
                 Description = todoItem.Description,
                 Difficulty = todoItem.Difficulty/*,
                 IsDone = todoItem.IsDone*/
+            };
+        }
+
+        public static UserDto AsDto(this User user)
+        {
+            return new UserDto
+            {
+                UserId = user.UserId,
+                UserName = user.UserName,
+                Password = user.Password,
+                DateCreated = user.DateCreated
+            };
+        }
+
+        public static ApiKeyDto AsDto(this ApiKeyModel apiKey)
+        {
+            return new ApiKeyDto
+            {
+                Id = apiKey.Id,
+                ApiKey = apiKey.ApiKey,
+                UserId = apiKey.UserId,
+                IsActive = apiKey.IsActive,
+                DateCreated = apiKey.DateCreated,
+                ExpirationDate = apiKey.ExpirationDate
             };
         }
     }
