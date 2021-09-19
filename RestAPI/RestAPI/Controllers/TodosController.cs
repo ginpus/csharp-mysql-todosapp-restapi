@@ -38,6 +38,19 @@ namespace RestAPI.Controllers
             return todos;
         }
 
+        [HttpGet]
+        [ApiKey]
+        [Route("apikey")]
+        public async Task<IEnumerable<ApiKeyDto>> GetAllApiKeysAsync() // Useris gali peržiūrėti savo ApiKeys
+        {
+            var userId = (Guid)HttpContext.Items["userId"];
+
+            var apiKeys = (await _userRepository.GetAllApiKeyAsync(userId))
+                        .Select(apiKey => apiKey.AsDto());
+
+            return apiKeys;
+        }
+
         [HttpPost]
         [ApiKey]
         public async Task<ActionResult<TodoItemDto>> AddTodo(AddTodoDto todoDto) // Pridėti TodoItem
@@ -67,9 +80,9 @@ namespace RestAPI.Controllers
         }
 
         [HttpPost]
-        [Route("user")]
-        //[ApiKey]
-        public async Task<ActionResult<UserDto>> CreateUser(AddUserDto user) // Pridėti TodoItem
+        [Route("usercreate")]
+        //[ApiKey] // as this is new user, API key does not exist at all
+        public async Task<ActionResult<UserDto>> CreateUser(AddUserDto user) // Useris gali susikurti account'ą
         {
             //var userId = (Guid)HttpContext.Items["userId"];
 
@@ -88,9 +101,9 @@ namespace RestAPI.Controllers
         }
 
         [HttpPost]
-        [Route("apikey")]
-        //[ApiKey]
-        public async Task<ActionResult<ApiKeyDto>> GenerateApiKey(ReadUserDto user) // Pridėti TodoItem
+        [Route("generateapikey")]
+        //[ApiKey] // does not make sense, as new user will not have any API yet
+        public async Task<ActionResult<ApiKeyDto>> GenerateApiKey(ReadUserDto user) // Useris gali susigeneruoti ApiKey
         {
             //var userId = (Guid)HttpContext.Items["userId"];
 
@@ -100,7 +113,7 @@ namespace RestAPI.Controllers
                 Console.WriteLine(selectedUser);
             };
 
-            var userFromDb = allUsersFromDb.FirstOrDefault(userInDb => user.UserName == userInDb.UserName);
+            var userFromDb = allUsersFromDb.FirstOrDefault(userInDb => user.UserName == userInDb.UserName & user.Password == userInDb.Password);
 
             Console.WriteLine($"Selected user: {userFromDb}");
 
@@ -145,7 +158,7 @@ namespace RestAPI.Controllers
         [HttpPut]
         [Route("{todoId}")]
         [ApiKey]
-        public async Task<ActionResult<TodoItemDto>> UpdateTodo(Guid todoId, UpdateTodoDto todo)
+        public async Task<ActionResult<TodoItemDto>> UpdateTodo(Guid todoId, UpdateTodoDto todo) // Pakeisti todo itemo savybes
         {
             var userId = (Guid)HttpContext.Items["userId"];
             if (todo is null)
@@ -172,7 +185,7 @@ namespace RestAPI.Controllers
         [HttpPatch]
         [Route("{todoId}/status")]
         [ApiKey]
-        public async Task<ActionResult<TodoItemDto>> UpdateTodoStatus(Guid todoId, UpdateTodoStatusDto todo)
+        public async Task<ActionResult<TodoItemDto>> UpdateTodoStatus(Guid todoId, UpdateTodoStatusDto todo) // Pakeisti statusa todo itemo
         {
             var userId = (Guid)HttpContext.Items["userId"];
 
@@ -198,7 +211,7 @@ namespace RestAPI.Controllers
         [HttpDelete]
         [Route("{todoId}")]
         [ApiKey]
-        public async Task<IActionResult> DeleteTodo(Guid todoId)
+        public async Task<IActionResult> DeleteTodo(Guid todoId) // Istrinti todo
         {
             var userId = (Guid)HttpContext.Items["userId"];
 

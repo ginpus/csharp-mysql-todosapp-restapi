@@ -22,11 +22,14 @@ namespace Persistence.Repositories
             _sqlClient = sqlClient;
         }
 
-        public async Task<IEnumerable<ApikeyReadModel>> GetAllApiKeyAsync()
+        public async Task<IEnumerable<ApiKeyModel>> GetAllApiKeyAsync(Guid userid)
         {
-            var sqlSelect = $"SELECT id, apikey, userid, isactive, datecreated FROM {ApiKeysTable}";
+            var sqlSelect = $"SELECT id, apikey, userid, isactive, datecreated FROM {ApiKeysTable} WHERE userid = @userid";
 
-            var allApiKeys = await _sqlClient.QueryAsync<ApikeyReadModel>(sqlSelect);
+            var allApiKeys = await _sqlClient.QueryAsync<ApiKeyModel>(sqlSelect, new
+            {
+                userid = userid
+            });
 
             return allApiKeys;
         }
