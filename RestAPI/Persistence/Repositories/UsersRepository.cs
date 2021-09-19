@@ -43,20 +43,53 @@ namespace Persistence.Repositories
             return apiKey;
         }
 
-        public async Task<int> GenerateApiKey(User user)
+        public async Task<IEnumerable<UserReadModel>> GetAllUsersAsync()
+        {
+            var sqlSelect = $"SELECT userid, username, password, datecreated FROM {UsersTable}";
+
+            var allUsers = await _sqlClient.QueryAsync<UserReadModel>(sqlSelect);
+
+            return allUsers;
+        }
+
+        public async Task<ApiKeyModel> GenerateApiKeyAsync(Guid userId)
         {
             var key = new byte[32];
             using (var generator = RandomNumberGenerator.Create())
                 generator.GetBytes(key);
-            var newApiKey = Convert.ToBase64String(key);
+            var generatedApiKey = Convert.ToBase64String(key);
+
+            var newApiKey = new ApiKeyModel
+            {
+                Id = Guid.NewGuid(),
+                ApiKey = generatedApiKey.ToString(),
+                UserId = userId,
+                IsActive = true,
+                DateCreated = DateTime.Now
+            };
 
             var sqlInsert = @$"INSERT INTO {ApiKeysTable} (id, apikey, userid, isactive, datecreated) VALUES(@id, @apikey, @userid, @isactive, @datecreated)";
+            var rowsAffected = await _sqlClient.ExecuteAsync(sqlInsert, new
+            {
+                id = newApiKey.Id,
+                apikey = newApiKey.ApiKey,
+                userid = newApiKey.UserId,
+                isactive = newApiKey.IsActive,
+                datecreated = newApiKey.DateCreated
+            });
+
+            return newApiKey;
+        }
+
+        public async Task<int> CreateUserAysnc(User user)
+        {
+            var sqlInsert = @$"INSERT INTO {UsersTable} (userid, username, password, datecreated) VALUES(@userid, @username, @password, @datecreated)";
+
             var rowsAffected = _sqlClient.ExecuteAsync(sqlInsert, new
             {
-                id = Guid.NewGuid(),
-                apikey = newApiKey,
                 userid = user.UserId,
-                isactive = true,
+                username = user.UserName,
+                password = user.Password,
                 datecreated = user.DateCreated
             });
 

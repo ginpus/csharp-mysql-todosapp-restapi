@@ -33,5 +33,28 @@ namespace RestAPI
                 IsDone = todoItem.IsDone*/
             };
         }
+
+        public static UserDto AsDto(this User user)
+        {
+            return new UserDto
+            {
+                UserId = user.UserId,
+                UserName = user.UserName,
+                Password = user.Password,
+                DateCreated = user.DateCreated
+            };
+        }
+
+        public static ApiKeyDto AsDto(this ApiKeyModel apiKey)
+        {
+            return new ApiKeyDto
+            {
+                Id = apiKey.Id,
+                ApiKey = apiKey.ApiKey,
+                UserId = apiKey.UserId,
+                IsActive = apiKey.IsActive,
+                DateCreated = apiKey.DateCreated
+            };
+        }
     }
 }

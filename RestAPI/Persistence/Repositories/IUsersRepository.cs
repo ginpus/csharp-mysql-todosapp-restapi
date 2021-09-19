@@ -14,6 +14,10 @@ namespace Persistence.Repositories
 
         Task<ApikeyReadModel> GetApiKeyAsync(string apikey);
 
-        Task<int> GenerateApiKey(User user);
+        Task<ApiKeyModel> GenerateApiKeyAsync(Guid userId);
+
+        Task<IEnumerable<UserReadModel>> GetAllUsersAsync();
+
+        Task<int> CreateUserAysnc(User user);
     }
 }

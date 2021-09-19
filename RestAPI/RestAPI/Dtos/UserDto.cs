@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Persistence.Models.ReadModels
+namespace RestAPI.Dtos
 {
-    public class UserReadModel
+    public class UserDto
     {
         public Guid UserId { get; set; }
 
@@ -15,10 +14,5 @@ namespace Persistence.Models.ReadModels
         public string Password { get; set; }
 
         public DateTime DateCreated { get; set; }
-
-        public override string ToString()
-        {
-            return $"{UserId}; {UserName}; {Password}";
-        }
     }
 }

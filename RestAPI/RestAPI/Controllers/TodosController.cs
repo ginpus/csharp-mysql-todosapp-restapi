@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Persistence.Models;
+using Persistence.Models.ReadModels;
 using Persistence.Repositories;
 using RestAPI.Attributes;
 using RestAPI.Dtos;
@@ -17,10 +18,12 @@ namespace RestAPI.Controllers
     public class TodosController : ControllerBase
     {
         private readonly ITodosRepository _todosRepository;
+        private readonly IUsersRepository _userRepository;
 
-        public TodosController(ITodosRepository todosRepository)
+        public TodosController(ITodosRepository todosRepository, IUsersRepository userRepository)
         {
             _todosRepository = todosRepository;
+            _userRepository = userRepository;
         }
 
         [HttpGet]
@@ -60,6 +63,65 @@ namespace RestAPI.Controllers
             //await _todosRepository.SaveOrUpdate(todoItem);
 
             return todoItem.AsDto();
+            //return CreatedAtAction(nameof(GetTodoItemByIdAsync), new { Id = todoItem.Id }, todoItem.AsDto());
+        }
+
+        [HttpPost]
+        [Route("user")]
+        //[ApiKey]
+        public async Task<ActionResult<UserDto>> CreateUser(AddUserDto user) // Pridėti TodoItem
+        {
+            //var userId = (Guid)HttpContext.Items["userId"];
+
+            var newUser = new User
+            {
+                UserId = Guid.NewGuid(),
+                UserName = user.UserName,
+                Password = user.Password,
+                DateCreated = DateTime.Now
+            };
+
+            await _userRepository.CreateUserAysnc(newUser);
+
+            return newUser.AsDto();
+            //return CreatedAtAction(nameof(GetTodoItemByIdAsync), new { Id = todoItem.Id }, todoItem.AsDto());
+        }
+
+        [HttpPost]
+        [Route("apikey")]
+        //[ApiKey]
+        public async Task<ActionResult<ApiKeyDto>> GenerateApiKey(ReadUserDto user) // Pridėti TodoItem
+        {
+            //var userId = (Guid)HttpContext.Items["userId"];
+
+            var allUsersFromDb = await _userRepository.GetAllUsersAsync();
+            foreach (var selectedUser in allUsersFromDb)
+            {
+                Console.WriteLine(selectedUser);
+            };
+
+            var userFromDb = allUsersFromDb.FirstOrDefault(userInDb => user.UserName == userInDb.UserName);
+
+            Console.WriteLine($"Selected user: {userFromDb}");
+
+            if (userFromDb is not null)
+            {
+                var apiKey = await _userRepository.GenerateApiKeyAsync(userFromDb.UserId);
+                return apiKey.AsDto();
+            }
+            else
+            {
+                Console.WriteLine("Wrong username or password.");
+                var apiKey = new ApiKeyModel
+                {
+                    Id = default,
+                    ApiKey = "noapikey",
+                    UserId = default,
+                    DateCreated = default,
+                    IsActive = false
+                };
+                return apiKey.AsDto();
+            }
             //return CreatedAtAction(nameof(GetTodoItemByIdAsync), new { Id = todoItem.Id }, todoItem.AsDto());
         }
 
