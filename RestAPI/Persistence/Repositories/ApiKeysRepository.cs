@@ -37,7 +37,7 @@ namespace Persistence.Repositories
         {
             var sqlSelect = $"SELECT id, apikey, userid, isactive, datecreated, expirationdate FROM {ApiKeysTable} WHERE apikey = @apikey";
 
-            var apiKey = await _sqlClient.QueryFirstOrDefaultAsync<ApikeyReadModel>(sqlSelect, new
+            var apiKey = await _sqlClient.QuerySingleOrDefaultAsync<ApikeyReadModel>(sqlSelect, new
             {
                 apikey = apikey
             });
@@ -74,6 +74,27 @@ namespace Persistence.Repositories
             });
 
             return newApiKey;
+        }
+
+        public async Task<int> SaveApiKeyAsync(ApikeyReadModel apiKey)
+        {
+            var sqlInsert = @$"INSERT INTO {ApiKeysTable} (id, apikey, userid, isactive, datecreated, expirationdate) VALUES(@id, @apikey, @userid, @isactive, @datecreated, @expiratondate)";
+            var rowsAffected = await _sqlClient.ExecuteAsync(sqlInsert, apiKey);
+
+            return rowsAffected;
+        }
+
+        public async Task<int> UpdateIsActive(Guid apiKeyId, bool isActive)
+        {
+            var sqlUpdate = $"UPDATE {ApiKeysTable} SET isactive = @isactive WHERE id = @id ";
+
+            var rowsAffected = await _sqlClient.ExecuteAsync(sqlUpdate, new
+            {
+                id = apiKeyId,
+                isactive = isActive
+            });
+
+            return rowsAffected;
         }
     }
 }
