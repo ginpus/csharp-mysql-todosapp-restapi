@@ -30,10 +30,9 @@ namespace Persistence
 
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
-            services.AddSingleton<IUsersRepository, UsersRepository>();
-            services.AddSingleton<ITodosRepository, TodosRepository>();
-
-            return services;
+            return services.AddSingleton<IUsersRepository, UsersRepository>()
+                .AddSingleton<ITodosRepository, TodosRepository>()
+                .AddSingleton<IApiKeysRepository, ApiKeysRepository>();
         }
 
         public static IServiceCollection AddSqlClient(this IServiceCollection services, IConfiguration configuration)

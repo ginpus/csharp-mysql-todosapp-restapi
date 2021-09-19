@@ -19,11 +19,13 @@ namespace RestAPI.Controllers
     {
         private readonly ITodosRepository _todosRepository;
         private readonly IUsersRepository _userRepository;
+        private readonly IApiKeysRepository _apiKeysRepository;
 
-        public TodosController(ITodosRepository todosRepository, IUsersRepository userRepository)
+        public TodosController(ITodosRepository todosRepository, IUsersRepository userRepository, IApiKeysRepository apiKeysRepository)
         {
             _todosRepository = todosRepository;
             _userRepository = userRepository;
+            _apiKeysRepository = apiKeysRepository;
         }
 
         [HttpGet]
@@ -45,7 +47,7 @@ namespace RestAPI.Controllers
         {
             var userId = (Guid)HttpContext.Items["userId"];
 
-            var apiKeys = (await _userRepository.GetAllApiKeyAsync(userId))
+            var apiKeys = (await _apiKeysRepository.GetAllApiKeyAsync(userId))
                         .Select(apiKey => apiKey.AsDto());
 
             return apiKeys;
@@ -119,7 +121,7 @@ namespace RestAPI.Controllers
 
             if (userFromDb is not null)
             {
-                var apiKey = await _userRepository.GenerateApiKeyAsync(userFromDb.UserId);
+                var apiKey = await _apiKeysRepository.GenerateApiKeyAsync(userFromDb.UserId);
                 return apiKey.AsDto();
             }
             else

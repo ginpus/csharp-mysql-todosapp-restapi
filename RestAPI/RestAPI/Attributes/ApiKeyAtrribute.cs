@@ -23,9 +23,9 @@ namespace RestAPI.Attributes
                 return;
             }
 
-            var usersRepository = context.HttpContext.RequestServices.GetService<IUsersRepository>();
+            var apiKeysRepository = context.HttpContext.RequestServices.GetService<IApiKeysRepository>();
 
-            var apiKey = await usersRepository.GetApiKeyAsync(key);
+            var apiKey = await apiKeysRepository.GetApiKeyAsync(key);
 
             if (apiKey is null)
             {

@@ -10,14 +10,17 @@ namespace Persistence.Repositories
 {
     public interface IUsersRepository
     {
-        Task<IEnumerable<ApiKeyModel>> GetAllApiKeyAsync(Guid userid);
+        /// <summary>
+        /// Get user by username
+        /// </summary>
+        /// <param name="username">Username</param>
+        /// <returns></returns>
+        Task<UserReadModel> GetUserAsync(string username);
 
-        Task<ApikeyReadModel> GetApiKeyAsync(string apikey);
-
-        Task<ApiKeyModel> GenerateApiKeyAsync(Guid userId);
-
-        Task<IEnumerable<UserReadModel>> GetAllUsersAsync();
+        Task<UserReadModel> GetUserAsync(string username, string password);
 
         Task<int> CreateUserAysnc(User user);
+
+        Task<IEnumerable<UserReadModel>> GetAllUsersAsync();
     }
 }

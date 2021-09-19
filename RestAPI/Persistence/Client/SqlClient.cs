@@ -47,5 +47,11 @@ namespace Persistence.Client
             using var connection = new MySqlConnection(_connectionString);
             return connection.QueryFirstOrDefaultAsync<T>(sql, param); //SingleOrDefault should nit let ever be returned more than one entry (e.g., enteies with same ID in DB)
         }
+
+        public Task<T> QuerySingleOrDefaultAsync<T>(string sql, object param = null)
+        {
+            using var connection = new MySqlConnection(_connectionString);
+            return connection.QuerySingleOrDefaultAsync<T>(sql, param); //SingleOrDefault should nit let ever be returned more than one entry (e.g., enteies with same ID in DB)
+        }
     }
 }

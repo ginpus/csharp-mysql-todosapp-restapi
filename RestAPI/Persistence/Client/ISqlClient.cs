@@ -15,5 +15,7 @@ namespace Persistence.Client
         IEnumerable<T> Query<T>(string sql, object param = null);
 
         Task<T> QueryFirstOrDefaultAsync<T>(string sql, object param = null);
+
+        Task<T> QuerySingleOrDefaultAsync<T>(string sql, object param = null);
     }
 }
