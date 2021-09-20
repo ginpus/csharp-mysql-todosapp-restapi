@@ -1,4 +1,5 @@
 ﻿using Contracts.Models.ResponseModels;
+using Persistence.Models;
 using Persistence.Models.ReadModels;
 using System;
 using System.Collections.Generic;
@@ -8,8 +9,9 @@ using System.Threading.Tasks;
 
 namespace Persistence.Repositories
 {
-    interface ISessionRepository
+    public interface ISessionRepository
     {
-        Task<int> SaveSessionKeyAsync(SessionKeyResponse sessionKey);
+        Task<int> SaveSessionKeyAsync(UserSessionKey sessionKey);
+        Task<SessionKeyReadModel> GetSessionKeyAsync(string sessionKey);
     }
 }

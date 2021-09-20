@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Persistence.Models.ReadModels
+namespace Persistence.Models
 {
-    public class SessionReadModel
+    public class UserSessionKey
     {
         public Guid SessionId { get; set; }
 
