@@ -13,8 +13,6 @@ namespace Persistence.Repositories
     public class UsersRepository : IUsersRepository
     {
         private const string UsersTable = "users";
-        private const string ApiKeysTable = "apikeys";
-
         private readonly ISqlClient _sqlClient;
 
         public UsersRepository(ISqlClient sqlClient)
