@@ -19,11 +19,13 @@ namespace RestAPI.Controllers
     {
         private readonly ITodosRepository _todosRepository;
         private readonly IUsersRepository _userRepository;
+        private readonly IApiKeysRepository _apiKeysRepository;
 
-        public TodosController(ITodosRepository todosRepository, IUsersRepository userRepository)
+        public TodosController(ITodosRepository todosRepository, IUsersRepository userRepository, IApiKeysRepository apiKeysRepository)
         {
             _todosRepository = todosRepository;
             _userRepository = userRepository;
+            _apiKeysRepository = apiKeysRepository;
         }
 
         [HttpGet]
@@ -36,19 +38,6 @@ namespace RestAPI.Controllers
                         .Select(todoItem => todoItem.AsDto());
 
             return todos;
-        }
-
-        [HttpGet]
-        [ApiKey]
-        [Route("apikey")]
-        public async Task<IEnumerable<ApiKeyDto>> GetAllApiKeysAsync() // Useris gali peržiūrėti savo ApiKeys
-        {
-            var userId = (Guid)HttpContext.Items["userId"];
-
-            var apiKeys = (await _userRepository.GetAllApiKeyAsync(userId))
-                        .Select(apiKey => apiKey.AsDto());
-
-            return apiKeys;
         }
 
         [HttpPost]
@@ -76,66 +65,6 @@ namespace RestAPI.Controllers
             //await _todosRepository.SaveOrUpdate(todoItem);
 
             return todoItem.AsDto();
-            //return CreatedAtAction(nameof(GetTodoItemByIdAsync), new { Id = todoItem.Id }, todoItem.AsDto());
-        }
-
-        [HttpPost]
-        [Route("usercreate")]
-        //[ApiKey] // as this is new user, API key does not exist at all
-        public async Task<ActionResult<UserDto>> CreateUser(AddUserDto user) // Useris gali susikurti account'ą
-        {
-            //var userId = (Guid)HttpContext.Items["userId"];
-
-            var newUser = new User
-            {
-                UserId = Guid.NewGuid(),
-                UserName = user.UserName,
-                Password = user.Password,
-                DateCreated = DateTime.Now
-            };
-
-            await _userRepository.CreateUserAysnc(newUser);
-
-            return newUser.AsDto();
-            //return CreatedAtAction(nameof(GetTodoItemByIdAsync), new { Id = todoItem.Id }, todoItem.AsDto());
-        }
-
-        [HttpPost]
-        [Route("generateapikey")]
-        //[ApiKey] // does not make sense, as new user will not have any API yet
-        public async Task<ActionResult<ApiKeyDto>> GenerateApiKey(ReadUserDto user) // Useris gali susigeneruoti ApiKey
-        {
-            //var userId = (Guid)HttpContext.Items["userId"];
-
-            var allUsersFromDb = await _userRepository.GetAllUsersAsync();
-            foreach (var selectedUser in allUsersFromDb)
-            {
-                Console.WriteLine(selectedUser);
-            };
-
-            var userFromDb = allUsersFromDb.FirstOrDefault(userInDb => user.UserName == userInDb.UserName & user.Password == userInDb.Password);
-
-            Console.WriteLine($"Selected user: {userFromDb}");
-
-            if (userFromDb is not null)
-            {
-                var apiKey = await _userRepository.GenerateApiKeyAsync(userFromDb.UserId);
-                return apiKey.AsDto();
-            }
-            else
-            {
-                Console.WriteLine("Wrong username or password.");
-                var apiKey = new ApiKeyModel
-                {
-                    Id = default,
-                    ApiKey = "noapikey",
-                    UserId = default,
-                    DateCreated = default,
-                    IsActive = false,
-                    ExpirationDate = default
-                };
-                return apiKey.AsDto();
-            }
             //return CreatedAtAction(nameof(GetTodoItemByIdAsync), new { Id = todoItem.Id }, todoItem.AsDto());
         }
 

@@ -5,15 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Persistence.Models.ReadModels
+namespace Contracts.Models.RequestModels
 {
-    public class UserCreateReadModel
+    public class ApiKeyRequest
     {
         [Required]
         public string UserName { get; set; }
 
         [Required]
-        [MinLength(8)]
         public string Password { get; set; }
     }
 }

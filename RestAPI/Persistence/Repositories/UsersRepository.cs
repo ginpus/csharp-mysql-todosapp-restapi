@@ -22,68 +22,29 @@ namespace Persistence.Repositories
             _sqlClient = sqlClient;
         }
 
-        public async Task<IEnumerable<ApiKeyModel>> GetAllApiKeyAsync(Guid userid)
+        public async Task<UserReadModel> GetUserAsync(string username)
         {
-            var sqlSelect = $"SELECT id, apikey, userid, isactive, datecreated, expirationdate FROM {ApiKeysTable} WHERE userid = @userid";
+            var sqlSelect = $"SELECT userid, username, password, datecreated FROM {UsersTable} where username = @username";
 
-            var allApiKeys = await _sqlClient.QueryAsync<ApiKeyModel>(sqlSelect, new
+            var user = await _sqlClient.QuerySingleOrDefaultAsync<UserReadModel>(sqlSelect, new
             {
-                userid = userid
+                username = username
             });
 
-            return allApiKeys;
+            return user;
         }
 
-        public async Task<ApikeyReadModel> GetApiKeyAsync(string apikey)
+        public async Task<UserReadModel> GetUserAsync(string username, string password)
         {
-            var sqlSelect = $"SELECT id, apikey, userid, isactive, datecreated, expirationdate FROM {ApiKeysTable} WHERE apikey = @apikey";
+            var sqlSelect = $"SELECT userid, username, password, datecreated FROM {UsersTable} where username = @username AND password = @password";
 
-            var apiKey = await _sqlClient.QueryFirstOrDefaultAsync<ApikeyReadModel>(sqlSelect, new
+            var user = await _sqlClient.QuerySingleOrDefaultAsync<UserReadModel>(sqlSelect, new
             {
-                apikey = apikey
+                username = username,
+                password = password
             });
 
-            return apiKey;
-        }
-
-        public async Task<IEnumerable<UserReadModel>> GetAllUsersAsync()
-        {
-            var sqlSelect = $"SELECT userid, username, password, datecreated FROM {UsersTable}";
-
-            var allUsers = await _sqlClient.QueryAsync<UserReadModel>(sqlSelect);
-
-            return allUsers;
-        }
-
-        public async Task<ApiKeyModel> GenerateApiKeyAsync(Guid userId)
-        {
-            var key = new byte[32];
-            using (var generator = RandomNumberGenerator.Create())
-                generator.GetBytes(key);
-            var generatedApiKey = Convert.ToBase64String(key);
-
-            var newApiKey = new ApiKeyModel
-            {
-                Id = Guid.NewGuid(),
-                ApiKey = generatedApiKey.ToString(),
-                UserId = userId,
-                IsActive = true,
-                DateCreated = DateTime.Now,
-                ExpirationDate = DateTime.Now.AddHours(4.00)
-            };
-
-            var sqlInsert = @$"INSERT INTO {ApiKeysTable} (id, apikey, userid, isactive, datecreated, expirationdate) VALUES(@id, @apikey, @userid, @isactive, @datecreated, @expiratondate)";
-            var rowsAffected = await _sqlClient.ExecuteAsync(sqlInsert, new
-            {
-                id = newApiKey.Id,
-                apikey = newApiKey.ApiKey,
-                userid = newApiKey.UserId,
-                isactive = newApiKey.IsActive,
-                datecreated = newApiKey.DateCreated,
-                expiratondate = newApiKey.ExpirationDate
-            });
-
-            return newApiKey;
+            return user;
         }
 
         public async Task<int> CreateUserAysnc(User user)
@@ -99,6 +60,15 @@ namespace Persistence.Repositories
             });
 
             return await rowsAffected;
+        }
+
+        public async Task<IEnumerable<UserReadModel>> GetAllUsersAsync()
+        {
+            var sqlSelect = $"SELECT userid, username, password, datecreated FROM {UsersTable}";
+
+            var allUsers = await _sqlClient.QueryAsync<UserReadModel>(sqlSelect);
+
+            return allUsers;
         }
     }
 }
