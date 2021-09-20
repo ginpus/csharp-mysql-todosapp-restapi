@@ -22,5 +22,7 @@ namespace Persistence.Repositories
         Task<int> CreateUserAysnc(User user);
 
         Task<IEnumerable<UserReadModel>> GetAllUsersAsync();
+
+
     }
 }

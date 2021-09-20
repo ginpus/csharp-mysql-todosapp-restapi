@@ -24,6 +24,17 @@ namespace RestAPI.SwaggerSettings
                     Type = "String"
                 }
             });
+
+            operation.Parameters.Add(new OpenApiParameter
+            {
+                Name = "SessionKey",
+                In = ParameterLocation.Header,
+                Required = false,
+                Schema = new OpenApiSchema
+                {
+                    Type = "String"
+                }
+            });
         }
     }
 }

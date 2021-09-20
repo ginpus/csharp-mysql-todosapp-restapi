@@ -29,8 +29,7 @@ namespace RestAPI.Controllers
         }
 
         [HttpGet]
-        [ApiKey]
-        [Route("getApiKeysByKey")]
+        [SessionKey]
         public async Task<IEnumerable<ApiKeyResponse>> GetAllApiKeysAsync() // Useris gali peržiūrėti savo ApiKeys
         {
             var userId = (Guid)HttpContext.Items["userId"];
@@ -41,7 +40,8 @@ namespace RestAPI.Controllers
             return apiKeys;
         }
 
-        [HttpGet]
+/*        [HttpGet]
+        [SessionKey]
         [Route("getApiKeysCreds")]
         public async Task<ActionResult<IEnumerable<ApiKeyResponse>>> GetAllApiKeysAsync(string userName, string password) // Useris gali peržiūrėti savo ApiKeys
         {
@@ -56,17 +56,13 @@ namespace RestAPI.Controllers
                         .Select(apiKey => apiKey.AsDto());
 
             return Ok(apiKeys);
-        }
+        }*/
 
         [HttpPost]
-        public async Task<ActionResult<ApiKeyResponse>> CreateApiKey(ApiKeyRequest request) // Sukurti API key
+        [SessionKey]
+        public async Task<ActionResult<ApiKeyResponse>> CreateApiKey() // Sukurti API key
         {
-            var user = await _userRepository.GetUserAsync(request.UserName, request.Password);
-
-            if (user is null)
-            {
-                return Unauthorized("Wrong username or password");
-            }
+            var userId = (Guid)HttpContext.Items["userId"];
 
             var key = new byte[32];
             using (var generator = RandomNumberGenerator.Create())
@@ -77,7 +73,7 @@ namespace RestAPI.Controllers
             {
                 Id = Guid.NewGuid(),
                 ApiKey = generatedApiKey.ToString(),
-                UserId = user.UserId,
+                UserId = userId,
                 IsActive = true,
                 DateCreated = DateTime.Now,
                 ExpirationDate = DateTime.Now.AddHours(4.00)
@@ -89,6 +85,7 @@ namespace RestAPI.Controllers
         }
 
         [HttpPut]
+        [SessionKey]
         [Route("{apiKeyId}/isActive")]
         public async Task<ActionResult<ApiKeyResponse>> UpdateKeyStateAsync(Guid apiKeyId, UpdateApiKeyStateRequest request)
         {

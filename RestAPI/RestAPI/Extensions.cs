@@ -72,5 +72,18 @@ namespace RestAPI
                 ExpirationDate = apiKey.ExpirationDate
             };
         }
+
+        public static SessionKeyResponse AsDto(this UserSessionKey sessionKey)
+        {
+            return new SessionKeyResponse
+            {
+                SessionId = sessionKey.SessionId,
+                SessionKey = sessionKey.SessionKey,
+                UserId = sessionKey.UserId,
+                IsActive = sessionKey.IsActive,
+                DateCreated = sessionKey.DateCreated,
+                ExpirationDate = sessionKey.ExpirationDate
+            };
+        }
     }
 }

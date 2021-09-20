@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Contracts.Models.RequestModels;
+using Contracts.Models.ResponseModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Persistence.Models;
 using Persistence.Models.ReadModels;
@@ -18,10 +20,12 @@ namespace RestAPI.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IUsersRepository _userRepository;
+        private readonly ISessionRepository _sessionRepository;
 
-        public AuthController(IUsersRepository userRepository)
+        public AuthController(IUsersRepository userRepository, ISessionRepository sessionRepository)
         {
             _userRepository = userRepository;
+            _sessionRepository = sessionRepository;
         }
 
         [HttpPost]
@@ -49,6 +53,38 @@ namespace RestAPI.Controllers
             await _userRepository.CreateUserAysnc(newUser);
 
             return newUser.AsDto();
+            //return CreatedAtAction(nameof(GetTodoItemByIdAsync), new { Id = todoItem.Id }, todoItem.AsDto());
+        }
+
+        [HttpPost]
+        [Route("signIn")]
+        public async Task<ActionResult<SessionKeyResponse>> CreateUserSession(string username, string password) // Useris gali susikurti sesija
+        {
+            var user = await _userRepository.GetUserAsync(username, password);
+
+            if (user is null)
+            {
+                return BadRequest("Wrong username or password");
+            }
+
+            var key = new byte[32];
+            using (var generator = RandomNumberGenerator.Create())
+                generator.GetBytes(key);
+            var generatedSessionKey = Convert.ToBase64String(key);
+
+            var newSessionKey = new UserSessionKey
+            {
+                SessionId = Guid.NewGuid(),
+                SessionKey = generatedSessionKey,
+                UserId = user.UserId,
+                IsActive = true,
+                DateCreated = DateTime.Now,
+                ExpirationDate = DateTime.Now.AddMinutes(15.00)
+            };
+
+            await _sessionRepository.SaveSessionKeyAsync(newSessionKey);
+
+            return newSessionKey.AsDto();
             //return CreatedAtAction(nameof(GetTodoItemByIdAsync), new { Id = todoItem.Id }, todoItem.AsDto());
         }
     }
