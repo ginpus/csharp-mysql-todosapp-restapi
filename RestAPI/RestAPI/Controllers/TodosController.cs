@@ -18,14 +18,10 @@ namespace RestAPI.Controllers
     public class TodosController : ControllerBase
     {
         private readonly ITodosRepository _todosRepository;
-        private readonly IUsersRepository _userRepository;
-        private readonly IApiKeysRepository _apiKeysRepository;
 
-        public TodosController(ITodosRepository todosRepository, IUsersRepository userRepository, IApiKeysRepository apiKeysRepository)
+        public TodosController(ITodosRepository todosRepository)
         {
             _todosRepository = todosRepository;
-            _userRepository = userRepository;
-            _apiKeysRepository = apiKeysRepository;
         }
 
         [HttpGet]

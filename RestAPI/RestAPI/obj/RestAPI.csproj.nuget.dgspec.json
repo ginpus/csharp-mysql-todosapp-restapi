@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Desktop\\dotNET\\C#\\8.31\\csharp-mysql-todosapp-restapi\\RestAPI\\RestAPI\\RestAPI.csproj": {}
+    "C:\\Users\\Administrator\\Desktop\\c#\\todoapp-restapi-mysql\\csharp-mysql-todosapp-restapi\\RestAPI\\RestAPI\\RestAPI.csproj": {}
   },
   "projects": {
-    "F:\\Desktop\\dotNET\\C#\\8.31\\csharp-mysql-todosapp-restapi\\RestAPI\\Contracts\\Contracts.csproj": {
+    "C:\\Users\\Administrator\\Desktop\\c#\\todoapp-restapi-mysql\\csharp-mysql-todosapp-restapi\\RestAPI\\Contracts\\Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Desktop\\dotNET\\C#\\8.31\\csharp-mysql-todosapp-restapi\\RestAPI\\Contracts\\Contracts.csproj",
+        "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\c#\\todoapp-restapi-mysql\\csharp-mysql-todosapp-restapi\\RestAPI\\Contracts\\Contracts.csproj",
         "projectName": "Contracts",
-        "projectPath": "F:\\Desktop\\dotNET\\C#\\8.31\\csharp-mysql-todosapp-restapi\\RestAPI\\Contracts\\Contracts.csproj",
-        "packagesPath": "C:\\Users\\ginta\\.nuget\\packages\\",
-        "outputPath": "F:\\Desktop\\dotNET\\C#\\8.31\\csharp-mysql-todosapp-restapi\\RestAPI\\Contracts\\obj\\",
+        "projectPath": "C:\\Users\\Administrator\\Desktop\\c#\\todoapp-restapi-mysql\\csharp-mysql-todosapp-restapi\\RestAPI\\Contracts\\Contracts.csproj",
+        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Administrator\\Desktop\\c#\\todoapp-restapi-mysql\\csharp-mysql-todosapp-restapi\\RestAPI\\Contracts\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\ginta\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -58,25 +54,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "F:\\Desktop\\dotNET\\C#\\8.31\\csharp-mysql-todosapp-restapi\\RestAPI\\Persistence\\Persistence.csproj": {
+    "C:\\Users\\Administrator\\Desktop\\c#\\todoapp-restapi-mysql\\csharp-mysql-todosapp-restapi\\RestAPI\\Persistence\\Persistence.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Desktop\\dotNET\\C#\\8.31\\csharp-mysql-todosapp-restapi\\RestAPI\\Persistence\\Persistence.csproj",
+        "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\c#\\todoapp-restapi-mysql\\csharp-mysql-todosapp-restapi\\RestAPI\\Persistence\\Persistence.csproj",
         "projectName": "Persistence",
-        "projectPath": "F:\\Desktop\\dotNET\\C#\\8.31\\csharp-mysql-todosapp-restapi\\RestAPI\\Persistence\\Persistence.csproj",
-        "packagesPath": "C:\\Users\\ginta\\.nuget\\packages\\",
-        "outputPath": "F:\\Desktop\\dotNET\\C#\\8.31\\csharp-mysql-todosapp-restapi\\RestAPI\\Persistence\\obj\\",
+        "projectPath": "C:\\Users\\Administrator\\Desktop\\c#\\todoapp-restapi-mysql\\csharp-mysql-todosapp-restapi\\RestAPI\\Persistence\\Persistence.csproj",
+        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Administrator\\Desktop\\c#\\todoapp-restapi-mysql\\csharp-mysql-todosapp-restapi\\RestAPI\\Persistence\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\ginta\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -90,8 +82,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "F:\\Desktop\\dotNET\\C#\\8.31\\csharp-mysql-todosapp-restapi\\RestAPI\\Contracts\\Contracts.csproj": {
-                "projectPath": "F:\\Desktop\\dotNET\\C#\\8.31\\csharp-mysql-todosapp-restapi\\RestAPI\\Contracts\\Contracts.csproj"
+              "C:\\Users\\Administrator\\Desktop\\c#\\todoapp-restapi-mysql\\csharp-mysql-todosapp-restapi\\RestAPI\\Contracts\\Contracts.csproj": {
+                "projectPath": "C:\\Users\\Administrator\\Desktop\\c#\\todoapp-restapi-mysql\\csharp-mysql-todosapp-restapi\\RestAPI\\Contracts\\Contracts.csproj"
               }
             }
           }
@@ -138,25 +130,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "F:\\Desktop\\dotNET\\C#\\8.31\\csharp-mysql-todosapp-restapi\\RestAPI\\RestAPI\\RestAPI.csproj": {
+    "C:\\Users\\Administrator\\Desktop\\c#\\todoapp-restapi-mysql\\csharp-mysql-todosapp-restapi\\RestAPI\\RestAPI\\RestAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Desktop\\dotNET\\C#\\8.31\\csharp-mysql-todosapp-restapi\\RestAPI\\RestAPI\\RestAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\c#\\todoapp-restapi-mysql\\csharp-mysql-todosapp-restapi\\RestAPI\\RestAPI\\RestAPI.csproj",
         "projectName": "RestAPI",
-        "projectPath": "F:\\Desktop\\dotNET\\C#\\8.31\\csharp-mysql-todosapp-restapi\\RestAPI\\RestAPI\\RestAPI.csproj",
-        "packagesPath": "C:\\Users\\ginta\\.nuget\\packages\\",
-        "outputPath": "F:\\Desktop\\dotNET\\C#\\8.31\\csharp-mysql-todosapp-restapi\\RestAPI\\RestAPI\\obj\\",
+        "projectPath": "C:\\Users\\Administrator\\Desktop\\c#\\todoapp-restapi-mysql\\csharp-mysql-todosapp-restapi\\RestAPI\\RestAPI\\RestAPI.csproj",
+        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Administrator\\Desktop\\c#\\todoapp-restapi-mysql\\csharp-mysql-todosapp-restapi\\RestAPI\\RestAPI\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\ginta\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -170,11 +158,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "F:\\Desktop\\dotNET\\C#\\8.31\\csharp-mysql-todosapp-restapi\\RestAPI\\Contracts\\Contracts.csproj": {
-                "projectPath": "F:\\Desktop\\dotNET\\C#\\8.31\\csharp-mysql-todosapp-restapi\\RestAPI\\Contracts\\Contracts.csproj"
+              "C:\\Users\\Administrator\\Desktop\\c#\\todoapp-restapi-mysql\\csharp-mysql-todosapp-restapi\\RestAPI\\Contracts\\Contracts.csproj": {
+                "projectPath": "C:\\Users\\Administrator\\Desktop\\c#\\todoapp-restapi-mysql\\csharp-mysql-todosapp-restapi\\RestAPI\\Contracts\\Contracts.csproj"
               },
-              "F:\\Desktop\\dotNET\\C#\\8.31\\csharp-mysql-todosapp-restapi\\RestAPI\\Persistence\\Persistence.csproj": {
-                "projectPath": "F:\\Desktop\\dotNET\\C#\\8.31\\csharp-mysql-todosapp-restapi\\RestAPI\\Persistence\\Persistence.csproj"
+              "C:\\Users\\Administrator\\Desktop\\c#\\todoapp-restapi-mysql\\csharp-mysql-todosapp-restapi\\RestAPI\\Persistence\\Persistence.csproj": {
+                "projectPath": "C:\\Users\\Administrator\\Desktop\\c#\\todoapp-restapi-mysql\\csharp-mysql-todosapp-restapi\\RestAPI\\Persistence\\Persistence.csproj"
               }
             }
           }
@@ -220,7 +208,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

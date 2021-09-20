@@ -10,3 +10,15 @@ F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Contracts\obj\De
 F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Contracts\obj\Debug\net5.0\Contracts.dll
 F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Contracts\obj\Debug\net5.0\ref\Contracts.dll
 F:\Desktop\dotNET\C#\8.31\csharp-mysql-todosapp-restapi\RestAPI\Contracts\obj\Debug\net5.0\Contracts.pdb
+C:\Users\Administrator\Desktop\c#\todoapp-restapi-mysql\csharp-mysql-todosapp-restapi\RestAPI\Contracts\bin\Debug\net5.0\Contracts.deps.json
+C:\Users\Administrator\Desktop\c#\todoapp-restapi-mysql\csharp-mysql-todosapp-restapi\RestAPI\Contracts\bin\Debug\net5.0\Contracts.dll
+C:\Users\Administrator\Desktop\c#\todoapp-restapi-mysql\csharp-mysql-todosapp-restapi\RestAPI\Contracts\bin\Debug\net5.0\ref\Contracts.dll
+C:\Users\Administrator\Desktop\c#\todoapp-restapi-mysql\csharp-mysql-todosapp-restapi\RestAPI\Contracts\bin\Debug\net5.0\Contracts.pdb
+C:\Users\Administrator\Desktop\c#\todoapp-restapi-mysql\csharp-mysql-todosapp-restapi\RestAPI\Contracts\obj\Debug\net5.0\Contracts.csproj.AssemblyReference.cache
+C:\Users\Administrator\Desktop\c#\todoapp-restapi-mysql\csharp-mysql-todosapp-restapi\RestAPI\Contracts\obj\Debug\net5.0\Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrator\Desktop\c#\todoapp-restapi-mysql\csharp-mysql-todosapp-restapi\RestAPI\Contracts\obj\Debug\net5.0\Contracts.AssemblyInfoInputs.cache
+C:\Users\Administrator\Desktop\c#\todoapp-restapi-mysql\csharp-mysql-todosapp-restapi\RestAPI\Contracts\obj\Debug\net5.0\Contracts.AssemblyInfo.cs
+C:\Users\Administrator\Desktop\c#\todoapp-restapi-mysql\csharp-mysql-todosapp-restapi\RestAPI\Contracts\obj\Debug\net5.0\Contracts.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Desktop\c#\todoapp-restapi-mysql\csharp-mysql-todosapp-restapi\RestAPI\Contracts\obj\Debug\net5.0\Contracts.dll
+C:\Users\Administrator\Desktop\c#\todoapp-restapi-mysql\csharp-mysql-todosapp-restapi\RestAPI\Contracts\obj\Debug\net5.0\ref\Contracts.dll
+C:\Users\Administrator\Desktop\c#\todoapp-restapi-mysql\csharp-mysql-todosapp-restapi\RestAPI\Contracts\obj\Debug\net5.0\Contracts.pdb
