@@ -33,7 +33,14 @@ namespace RestAPI.Attributes
                 return;
             }
 
-            if (!sessionKey.IsActive || sessionKey.ExpirationDate < DateTime.Now)
+            if (!sessionKey.IsActive)
+            {
+                context.Result = new BadRequestObjectResult("sessionKey is inactive");
+
+                return;
+            }
+
+            if (sessionKey.ExpirationDate <= DateTime.Now)
             {
                 context.Result = new BadRequestObjectResult("sessionKey expired");
 
