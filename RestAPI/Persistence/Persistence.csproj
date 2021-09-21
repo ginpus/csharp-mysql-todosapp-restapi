@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\WriteModels\**" />
+    <EmbeddedResource Remove="Models\WriteModels\**" />
+    <None Remove="Models\WriteModels\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Models\TodoItem.cs~RFbc2930.TMP" />
   </ItemGroup>
 
@@ -17,9 +23,5 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Contracts\Contracts.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\WriteModels\" />
   </ItemGroup>
 </Project>

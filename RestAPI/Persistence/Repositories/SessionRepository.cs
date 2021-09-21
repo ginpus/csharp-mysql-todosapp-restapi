@@ -13,7 +13,6 @@ namespace Persistence.Repositories
     public class SessionRepository : ISessionRepository
     { 
         private const string SessionsTable = "sessionkeys";
-        //private const string UsersTable = "users";
         private readonly ISqlClient _sqlClient;
 
         public SessionRepository(ISqlClient sqlClient)
