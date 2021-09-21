@@ -45,7 +45,7 @@ namespace Persistence.Repositories
             return user;
         }
 
-        public async Task<int> CreateUserAysnc(User user)
+        public async Task<int> CreateUserAysnc(UserWriteModel user)
         {
             var sqlInsert = @$"INSERT INTO {UsersTable} (userid, username, password, datecreated) VALUES(@userid, @username, @password, @datecreated)";
 

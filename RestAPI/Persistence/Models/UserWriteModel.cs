@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Persistence.Models
 {
-    public class User
+    public class UserWriteModel
     {
         public Guid UserId { get; set; }
 

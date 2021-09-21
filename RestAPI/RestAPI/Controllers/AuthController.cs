@@ -42,7 +42,7 @@ namespace RestAPI.Controllers
                 return Conflict($"User with Username: '{user.UserName}' already exists!");
             }
 
-            var newUser = new User
+            var newUser = new UserWriteModel
             {
                 UserId = Guid.NewGuid(),
                 UserName = user.UserName,
@@ -72,7 +72,7 @@ namespace RestAPI.Controllers
                 generator.GetBytes(key);
             var generatedSessionKey = Convert.ToBase64String(key);
 
-            var newSessionKey = new UserSessionKey
+            var newSessionKey = new SessionKeyWriteModel
             {
                 SessionId = Guid.NewGuid(),
                 SessionKey = generatedSessionKey,

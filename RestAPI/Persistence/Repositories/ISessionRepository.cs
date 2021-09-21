@@ -11,7 +11,7 @@ namespace Persistence.Repositories
 {
     public interface ISessionRepository
     {
-        Task<int> SaveSessionKeyAsync(UserSessionKey sessionKey);
+        Task<int> SaveSessionKeyAsync(SessionKeyWriteModel sessionKey);
         Task<SessionKeyReadModel> GetSessionKeyAsync(string sessionKey);
     }
 }

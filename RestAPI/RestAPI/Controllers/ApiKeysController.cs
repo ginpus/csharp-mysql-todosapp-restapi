@@ -51,7 +51,7 @@ namespace RestAPI.Controllers
                 generator.GetBytes(key);
             var generatedApiKey = Convert.ToBase64String(key);
 
-            var newApiKey = new ApiKeyModel
+            var newApiKey = new ApikeyReadModel
             {
                 Id = Guid.NewGuid(),
                 ApiKey = generatedApiKey.ToString(),

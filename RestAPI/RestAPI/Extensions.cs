@@ -36,7 +36,7 @@ namespace RestAPI
             };
         }
 
-        public static UserDto AsDto(this User user)
+        public static UserDto AsDto(this UserWriteModel user)
         {
             return new UserDto
             {
@@ -44,19 +44,6 @@ namespace RestAPI
                 UserName = user.UserName,
                 Password = user.Password,
                 DateCreated = user.DateCreated
-            };
-        }
-
-        public static ApiKeyResponse AsDto(this ApiKeyModel apiKey)
-        {
-            return new ApiKeyResponse
-            {
-                Id = apiKey.Id,
-                ApiKey = apiKey.ApiKey,
-                UserId = apiKey.UserId,
-                IsActive = apiKey.IsActive,
-                DateCreated = apiKey.DateCreated,
-                ExpirationDate = apiKey.ExpirationDate
             };
         }
 
@@ -73,7 +60,7 @@ namespace RestAPI
             };
         }
 
-        public static SessionKeyResponse AsDto(this UserSessionKey sessionKey)
+        public static SessionKeyResponse AsDto(this SessionKeyWriteModel sessionKey)
         {
             return new SessionKeyResponse
             {

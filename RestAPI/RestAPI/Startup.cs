@@ -34,8 +34,8 @@ namespace RestAPI
         public void ConfigureServices(IServiceCollection services)
         {
             //Allows to receive value from JSON object "ConnectionStrings" from appsettings.json file. [] brackets allows to receive a value from inside JSON property of corresponding name
-            var connectionString = Configuration.GetSection("ConnectionStrings")["SqlConnectionString"];
-            var valueToChange = Configuration.GetSection("ConnectionStrings")["SomethingToBeChangedWithoutCodeChange"];
+/*            var connectionString = Configuration.GetSection("ConnectionStrings")["SqlConnectionString"];
+            var valueToChange = Configuration.GetSection("ConnectionStrings")["SomethingToBeChangedWithoutCodeChange"];*/
 
             services.AddControllers().AddJsonOptions(options => // required to represnet ENUM as string value (not as number)
             {

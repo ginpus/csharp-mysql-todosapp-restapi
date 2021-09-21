@@ -20,7 +20,7 @@ namespace Persistence.Repositories
         _sqlClient = sqlClient;
         }
 
-        public async Task<int> SaveSessionKeyAsync(UserSessionKey sessionKey)
+        public async Task<int> SaveSessionKeyAsync(SessionKeyWriteModel sessionKey)
         {
             var sqlInsert = @$"INSERT INTO {SessionsTable} (sessionid, sessionkey, userid, isactive, datecreated, expirationdate) VALUES(@sessionid, @sessionkey, @userid, @isactive, @datecreated, @expirationdate)";
             var rowsAffected = await _sqlClient.ExecuteAsync(sqlInsert, sessionKey);
