@@ -3,19 +3,22 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace RestAPI.Dtos
+namespace Persistence.Models
 {
-    public class AddTodoDto
+    public class UpdateTodoWriteModel
     {
         [Required]
         public string Title { get; set; }
 
-        [Required]
         public string Description { get; set; }
 
         [Required]
         public Difficulty Difficulty { get; set; }
+
+        /*        [Required]
+                public bool IsDone { get; set; }*/
     }
 }

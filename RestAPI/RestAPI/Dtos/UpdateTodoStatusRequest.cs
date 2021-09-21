@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RestAPI.Dtos
 {
-    public class UpdateTodoStatusDto
+    public class UpdateTodoStatusRequest
     {
         [Required]
         public bool IsDone { get; set; }

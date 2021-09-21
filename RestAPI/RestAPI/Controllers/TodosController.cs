@@ -38,7 +38,7 @@ namespace RestAPI.Controllers
 
         [HttpPost]
         [ApiKey]
-        public async Task<ActionResult<TodoItemResponse>> AddTodo(AddTodoDto todoDto) // Pridėti TodoItem
+        public async Task<ActionResult<TodoItemResponse>> AddTodo(AddTodoRequest todoDto) // Pridėti TodoItem
         {
             var userId = (Guid)HttpContext.Items["userId"];
 
@@ -84,7 +84,7 @@ namespace RestAPI.Controllers
         [HttpPut]
         [Route("{todoId}")]
         [ApiKey]
-        public async Task<ActionResult<TodoItemResponse>> UpdateTodo(Guid todoId, UpdateTodoDto todo) // Pakeisti todo itemo savybes
+        public async Task<ActionResult<TodoItemResponse>> UpdateTodo(Guid todoId, UpdateTodoRequest todo) // Pakeisti todo itemo savybes
         {
             var userId = (Guid)HttpContext.Items["userId"];
             if (todo is null)
@@ -120,7 +120,7 @@ namespace RestAPI.Controllers
         [HttpPatch]
         [Route("{todoId}/status")]
         [ApiKey]
-        public async Task<ActionResult<TodoItemResponse>> UpdateTodoStatus(Guid todoId, UpdateTodoStatusDto todo) // Pakeisti statusa todo itemo
+        public async Task<ActionResult<TodoItemResponse>> UpdateTodoStatus(Guid todoId, UpdateTodoStatusRequest todo) // Pakeisti statusa todo itemo
         {
             var userId = (Guid)HttpContext.Items["userId"];
 

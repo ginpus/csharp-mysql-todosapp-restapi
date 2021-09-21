@@ -31,7 +31,7 @@ namespace RestAPI.Controllers
         [HttpPost]
         [Route("signUp")]
         //[ApiKey] // as this is new user, API key does not exist at all
-        public async Task<ActionResult<UserDto>> CreateUser(AddUserDto user) // Useris gali susikurti account'ą
+        public async Task<ActionResult<UserResponse>> CreateUser(AddUserRequest user) // Useris gali susikurti account'ą
         {
             //var userId = (Guid)HttpContext.Items["userId"];
 

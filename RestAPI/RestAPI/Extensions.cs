@@ -39,9 +39,9 @@ namespace RestAPI
             };
         }
 
-        public static UpdateTodoDto AsDto(this UpdateTodo todoItem)
+        public static UpdateTodoRequest AsDto(this UpdateTodoWriteModel todoItem)
         {
-            return new UpdateTodoDto
+            return new UpdateTodoRequest
             {
                 Title = todoItem.Title,
                 Description = todoItem.Description,
@@ -50,9 +50,9 @@ namespace RestAPI
             };
         }
 
-        public static UserDto AsDto(this UserWriteModel user)
+        public static UserResponse AsDto(this UserWriteModel user)
         {
-            return new UserDto
+            return new UserResponse
             {
                 UserId = user.UserId,
                 UserName = user.UserName,

@@ -41,7 +41,7 @@ namespace Persistence.Repositories
             return rowsAffected;
         }
 
-        public async Task<int> EditAsync(Guid id, UpdateTodo todo, Guid userid)
+        public async Task<int> EditAsync(Guid id, UpdateTodoWriteModel todo, Guid userid)
         {
             //var sqlUpdate = $"UPDATE {TableName} SET title = @title, description = @description, difficulty = @difficulty, isdone = @isdone  where id = @id";
             var sqlUpdate = $"UPDATE {TableName} SET title = @title, description = @description, difficulty = @difficulty  where id = @id AND userid = @userid";

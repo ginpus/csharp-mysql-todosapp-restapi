@@ -20,12 +20,10 @@ namespace RestAPI.Controllers
     public class ApiKeysController : ControllerBase
     {
         private readonly IApiKeysRepository _apiKeysRepository;
-        private readonly IUsersRepository _userRepository;
 
-        public ApiKeysController(IApiKeysRepository apiKeysRepository, IUsersRepository userRepository)
+        public ApiKeysController(IApiKeysRepository apiKeysRepository)
         {
             _apiKeysRepository = apiKeysRepository;
-            _userRepository = userRepository;
         }
 
         [HttpGet]
