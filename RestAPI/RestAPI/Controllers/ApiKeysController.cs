@@ -40,24 +40,6 @@ namespace RestAPI.Controllers
             return apiKeys;
         }
 
-/*        [HttpGet]
-        [SessionKey]
-        [Route("getApiKeysCreds")]
-        public async Task<ActionResult<IEnumerable<ApiKeyResponse>>> GetAllApiKeysAsync(string userName, string password) // Useris gali peržiūrėti savo ApiKeys
-        {
-            var user = await _userRepository.GetUserAsync(userName, password);
-
-            if (user is null)
-            {
-                return BadRequest("Wrong username or password");
-            }
-
-            var apiKeys = (await _apiKeysRepository.GetAllApiKeyAsync(user.UserId))
-                        .Select(apiKey => apiKey.AsDto());
-
-            return Ok(apiKeys);
-        }*/
-
         [HttpPost]
         [SessionKey]
         public async Task<ActionResult<ApiKeyResponse>> CreateApiKey() // Sukurti API key

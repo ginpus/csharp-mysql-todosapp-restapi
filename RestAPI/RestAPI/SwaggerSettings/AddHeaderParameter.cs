@@ -1,4 +1,5 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 using System.Collections.Generic;
@@ -14,27 +15,38 @@ namespace RestAPI.SwaggerSettings
             if (operation.Parameters == null)
                 operation.Parameters = new List<OpenApiParameter>();
 
-            operation.Parameters.Add(new OpenApiParameter
-            {
-                Name = "ApiKey",
-                In = ParameterLocation.Header,
-                Required = false,
-                Schema = new OpenApiSchema
-                {
-                    Type = "String"
-                }
-            });
+            var descriptor = context.ApiDescription.ActionDescriptor as ControllerActionDescriptor;
 
-            operation.Parameters.Add(new OpenApiParameter
+            if (descriptor != null && descriptor.ControllerName.StartsWith("Todos"))
             {
-                Name = "SessionKey",
-                In = ParameterLocation.Header,
-                Required = false,
-                Schema = new OpenApiSchema
+                operation.Parameters.Add(new OpenApiParameter
                 {
-                    Type = "String"
-                }
-            });
+                    Name = "ApiKey",
+                    In = ParameterLocation.Header,
+                    Required = false,
+                    Schema = new OpenApiSchema
+                    {
+                        Type = "String"
+                    }
+                });
+            }
+
+            else if (descriptor != null && descriptor.ControllerName.StartsWith("ApiKey"))
+            {
+                operation.Parameters.Add(new OpenApiParameter
+                {
+                    Name = "SessionKey",
+                    In = ParameterLocation.Header,
+                    Required = false,
+                    Schema = new OpenApiSchema
+                    {
+                        Type = "String"
+                    }
+                });
+            } else
+            {
+                return;
+            }
         }
     }
 }
