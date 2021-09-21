@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Persistence.Models
 {
-    public class TodoItem
+    public class TodoItemWriteModel
     {
         public Guid Id { get; set; }
         public string Title { get; set; }

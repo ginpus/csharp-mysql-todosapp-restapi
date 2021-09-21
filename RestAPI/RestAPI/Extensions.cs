@@ -11,9 +11,23 @@ namespace RestAPI
 {
     public static class Extensions
     {
-        public static TodoItemDto AsDto(this TodoItem todoItem)
+        public static TodoItemResponse AsDto(this TodoItemReadModel todoItem)
         {
-            return new TodoItemDto
+            return new TodoItemResponse
+            {
+                Id = todoItem.Id,
+                Title = todoItem.Title,
+                Description = todoItem.Description,
+                Difficulty = todoItem.Difficulty,
+                IsDone = todoItem.IsDone,
+                Date_Created = todoItem.Date_Created,
+                UserId = todoItem.UserId
+            };
+        }
+
+        public static TodoItemResponse AsDto(this TodoItemWriteModel todoItem)
+        {
+            return new TodoItemResponse
             {
                 Id = todoItem.Id,
                 Title = todoItem.Title,

@@ -9,13 +9,13 @@ namespace Persistence.Repositories
 {
     public interface ITodosRepository
     {
-        Task<IEnumerable<TodoItem>> GetAllAsync();
+        Task<IEnumerable<TodoItemReadModel>> GetAllAsync();
 
-        Task<TodoItem> GetTodoItemByIdAsync(Guid id, Guid userid);
+        Task<TodoItemReadModel> GetTodoItemByIdAsync(Guid id, Guid userid);
 
-        Task<IEnumerable<TodoItem>> GetTodoItemByUserIdAsync(Guid userid);
+        Task<IEnumerable<TodoItemReadModel>> GetTodoItemByUserIdAsync(Guid userid);
 
-        Task<int> SaveAsync(TodoItem todoItem);
+        Task<int> SaveAsync(TodoItemWriteModel todoItem);
 
         Task<int> EditAsync(Guid id, UpdateTodo todo, Guid userid);
 
@@ -23,6 +23,6 @@ namespace Persistence.Repositories
 
         Task<int> DeleteAllAsync(Guid userid);
 
-        Task<int> SaveOrUpdate(TodoItem model);
+        Task<int> SaveOrUpdate(TodoItemWriteModel model);
     }
 }

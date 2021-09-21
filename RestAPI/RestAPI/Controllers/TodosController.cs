@@ -26,7 +26,7 @@ namespace RestAPI.Controllers
 
         [HttpGet]
         [ApiKey]
-        public async Task<IEnumerable<TodoItemDto>> GetTodos() // Gauti visus TodoItems
+        public async Task<IEnumerable<TodoItemResponse>> GetTodos() // Gauti visus TodoItems
         {
             var userId = (Guid)HttpContext.Items["userId"];
 
@@ -38,13 +38,13 @@ namespace RestAPI.Controllers
 
         [HttpPost]
         [ApiKey]
-        public async Task<ActionResult<TodoItemDto>> AddTodo(AddTodoDto todoDto) // Pridėti TodoItem
+        public async Task<ActionResult<TodoItemResponse>> AddTodo(AddTodoDto todoDto) // Pridėti TodoItem
         {
             var userId = (Guid)HttpContext.Items["userId"];
 
             Console.WriteLine(userId);
 
-            var todoItem = new TodoItem
+            var todoItem = new TodoItemWriteModel
             {
                 Id = Guid.NewGuid(),
                 Title = todoDto.Title,
@@ -67,7 +67,7 @@ namespace RestAPI.Controllers
         [HttpGet]
         [Route("{todoId}")]
         [ApiKey]
-        public async Task<ActionResult<TodoItemDto>> GetTodoItemByIdAsync(Guid todoId) // Gauti konkretų TodoItem
+        public async Task<ActionResult<TodoItemResponse>> GetTodoItemByIdAsync(Guid todoId) // Gauti konkretų TodoItem
         {
             var userId = (Guid)HttpContext.Items["userId"];
 
@@ -84,7 +84,7 @@ namespace RestAPI.Controllers
         [HttpPut]
         [Route("{todoId}")]
         [ApiKey]
-        public async Task<ActionResult<TodoItemDto>> UpdateTodo(Guid todoId, UpdateTodoDto todo) // Pakeisti todo itemo savybes
+        public async Task<ActionResult<TodoItemResponse>> UpdateTodo(Guid todoId, UpdateTodoDto todo) // Pakeisti todo itemo savybes
         {
             var userId = (Guid)HttpContext.Items["userId"];
             if (todo is null)
@@ -103,7 +103,16 @@ namespace RestAPI.Controllers
             todoToUpdate.Description = todo.Description;
             todoToUpdate.Difficulty = todo.Difficulty;
 
-            await _todosRepository.SaveOrUpdate(todoToUpdate);
+            await _todosRepository.SaveOrUpdate(new TodoItemWriteModel
+            {
+                Id = todoToUpdate.Id,
+                Title = todoToUpdate.Title,
+                Description = todoToUpdate.Description,
+                Difficulty = todoToUpdate.Difficulty,
+                IsDone = todoToUpdate.IsDone,
+                Date_Created = todoToUpdate.Date_Created,
+                UserId = todoToUpdate.UserId
+            });
 
             return todoToUpdate.AsDto();
         }
@@ -111,7 +120,7 @@ namespace RestAPI.Controllers
         [HttpPatch]
         [Route("{todoId}/status")]
         [ApiKey]
-        public async Task<ActionResult<TodoItemDto>> UpdateTodoStatus(Guid todoId, UpdateTodoStatusDto todo) // Pakeisti statusa todo itemo
+        public async Task<ActionResult<TodoItemResponse>> UpdateTodoStatus(Guid todoId, UpdateTodoStatusDto todo) // Pakeisti statusa todo itemo
         {
             var userId = (Guid)HttpContext.Items["userId"];
 
@@ -129,7 +138,16 @@ namespace RestAPI.Controllers
 
             todoToUpdate.IsDone = todo.IsDone;
 
-            await _todosRepository.SaveOrUpdate(todoToUpdate);
+            await _todosRepository.SaveOrUpdate(new TodoItemWriteModel
+            {
+                Id = todoToUpdate.Id,
+                Title = todoToUpdate.Title,
+                Description = todoToUpdate.Description,
+                Difficulty = todoToUpdate.Difficulty,
+                IsDone = todoToUpdate.IsDone,
+                Date_Created = todoToUpdate.Date_Created,
+                UserId = todoToUpdate.UserId
+            });
 
             return todoToUpdate.AsDto();
         }

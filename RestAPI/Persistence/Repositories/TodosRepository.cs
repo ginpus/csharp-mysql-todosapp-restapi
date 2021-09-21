@@ -57,35 +57,35 @@ namespace Persistence.Repositories
             return rowsAffected;
         }
 
-        public async Task<IEnumerable<TodoItem>> GetAllAsync()
+        public async Task<IEnumerable<TodoItemReadModel>> GetAllAsync()
         {
             var sqlSelect = $"SELECT id, title, description, difficulty, date_created, isdone, userid FROM {TableName} ORDER BY date_created desc";
 
-            return await _sqlClient.QueryAsync<TodoItem>(sqlSelect);
+            return await _sqlClient.QueryAsync<TodoItemReadModel>(sqlSelect);
         }
 
-        public async Task<TodoItem> GetTodoItemByIdAsync(Guid id, Guid userid)
+        public async Task<TodoItemReadModel> GetTodoItemByIdAsync(Guid id, Guid userid)
         {
             var sqlSelect = $"SELECT id, title, description, difficulty, date_created, isdone, userid FROM {TableName} where id = @id AND userid = @userid ORDER BY date_created desc";
 
-            return await _sqlClient.QueryFirstOrDefaultAsync<TodoItem>(sqlSelect, new
+            return await _sqlClient.QueryFirstOrDefaultAsync<TodoItemReadModel>(sqlSelect, new
             {
                 id = id,
                 userid = userid
             });
         }
 
-        public async Task<IEnumerable<TodoItem>> GetTodoItemByUserIdAsync(Guid userid)
+        public async Task<IEnumerable<TodoItemReadModel>> GetTodoItemByUserIdAsync(Guid userid)
         {
             var sqlSelect = $"SELECT id, title, description, difficulty, date_created, isdone, userid FROM {TableName} where userid = @userid ORDER BY date_created desc";
 
-            return await _sqlClient.QueryAsync<TodoItem>(sqlSelect, new
+            return await _sqlClient.QueryAsync<TodoItemReadModel>(sqlSelect, new
             {
                 userid = userid
             });
         }
 
-        public async Task<int> SaveAsync(TodoItem todoItem)
+        public async Task<int> SaveAsync(TodoItemWriteModel todoItem)
         {
             var sqlInsert = @$"INSERT INTO {TableName} (id, title, description, difficulty, date_created, isdone, userid) VALUES(@id, @title, @description, @difficulty, @date_created, @isdone, @userid)";
             var rowsAffected = _sqlClient.ExecuteAsync(sqlInsert, new
@@ -101,7 +101,7 @@ namespace Persistence.Repositories
             return await rowsAffected;
         }
 
-        public async Task<int> SaveOrUpdate(TodoItem model)
+        public async Task<int> SaveOrUpdate(TodoItemWriteModel model)
         {
             var sql = @$"INSERT INTO {TableName} (id, title, description, difficulty, date_created, isdone, userid) VALUES(@id, @title, @description, @difficulty, @date_created, @isdone, @userid) ON DUPLICATE KEY UPDATE title = @title, description = @description, difficulty = @difficulty, isdone = @isdone, userid = @userid";
 

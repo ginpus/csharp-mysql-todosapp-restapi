@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RestAPI.Dtos
 {
-    public class TodoItemDto
+    public class TodoItemResponse
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
