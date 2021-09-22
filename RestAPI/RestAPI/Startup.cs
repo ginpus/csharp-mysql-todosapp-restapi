@@ -12,6 +12,7 @@ using MySql.Data.MySqlClient;
 using Persistence;
 using Persistence.Client;
 using Persistence.Repositories;
+using RestAPI.Options;
 using RestAPI.SwaggerSettings;
 using System;
 using System.Collections.Generic;
@@ -34,8 +35,11 @@ namespace RestAPI
         public void ConfigureServices(IServiceCollection services)
         {
             //Allows to receive value from JSON object "ConnectionStrings" from appsettings.json file. [] brackets allows to receive a value from inside JSON property of corresponding name
-/*            var connectionString = Configuration.GetSection("ConnectionStrings")["SqlConnectionString"];
-            var valueToChange = Configuration.GetSection("ConnectionStrings")["SomethingToBeChangedWithoutCodeChange"];*/
+            /*            var connectionString = Configuration.GetSection("ConnectionStrings")["SqlConnectionString"];
+                        var valueToChange = Configuration.GetSection("ConnectionStrings")["SomethingToBeChangedWithoutCodeChange"];*/
+
+            services.Configure<ApiKeySettings>(Configuration.GetSection("ApiKeySettings"));
+            services.Configure<SessionKeySettings>(Configuration.GetSection("SessionKeySettings"));
 
             services.AddControllers().AddJsonOptions(options => // required to represnet ENUM as string value (not as number)
             {

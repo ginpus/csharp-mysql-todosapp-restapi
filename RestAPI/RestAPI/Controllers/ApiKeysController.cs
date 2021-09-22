@@ -12,6 +12,8 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Contracts.Models.RequestModels;
 using Contracts.Models.ResponseModels;
+using RestAPI.Options;
+using Microsoft.Extensions.Options;
 
 namespace RestAPI.Controllers
 {
@@ -20,10 +22,12 @@ namespace RestAPI.Controllers
     public class ApiKeysController : ControllerBase
     {
         private readonly IApiKeysRepository _apiKeysRepository;
+        private readonly ApiKeySettings _apiKeySettings; // inserting settings class (from appsettings.json file)
 
-        public ApiKeysController(IApiKeysRepository apiKeysRepository)
+        public ApiKeysController(IApiKeysRepository apiKeysRepository, IOptions<ApiKeySettings> apiKeySettings)
         {
             _apiKeysRepository = apiKeysRepository;
+            _apiKeySettings = apiKeySettings.Value; // injecting options value into controller
         }
 
         [HttpGet]
@@ -56,7 +60,7 @@ namespace RestAPI.Controllers
                 UserId = userId,
                 IsActive = true,
                 DateCreated = DateTime.Now,
-                ExpirationDate = DateTime.Now.AddHours(4.00)
+                ExpirationDate = DateTime.Now.AddMinutes(_apiKeySettings.ExpirationTimeInMinutes) // using parameter from appsettings.json
             };
 
             await _apiKeysRepository.SaveApiKeyAsync(newApiKey.AsDto());

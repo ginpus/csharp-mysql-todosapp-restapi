@@ -2,11 +2,13 @@
 using Contracts.Models.ResponseModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Persistence.Models;
 using Persistence.Models.ReadModels;
 using Persistence.Repositories;
 using RestAPI.Attributes;
 using RestAPI.Dtos;
+using RestAPI.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +23,16 @@ namespace RestAPI.Controllers
     {
         private readonly IUsersRepository _userRepository;
         private readonly ISessionRepository _sessionRepository;
+        private readonly SessionKeySettings _sessionKeySettings;
 
-        public AuthController(IUsersRepository userRepository, ISessionRepository sessionRepository)
+        public AuthController(
+            IUsersRepository userRepository,
+            ISessionRepository sessionRepository,
+            IOptions<SessionKeySettings> sessionKeySettings)
         {
             _userRepository = userRepository;
             _sessionRepository = sessionRepository;
+            _sessionKeySettings = sessionKeySettings.Value;
         }
 
         [HttpPost]
@@ -79,7 +86,7 @@ namespace RestAPI.Controllers
                 UserId = user.UserId,
                 IsActive = true,
                 DateCreated = DateTime.Now,
-                ExpirationDate = DateTime.Now.AddMinutes(15.00)
+                ExpirationDate = DateTime.Now.AddMinutes(_sessionKeySettings.ExpirationTimeInMinutes)
             };
 
             await _sessionRepository.SaveSessionKeyAsync(newSessionKey);
