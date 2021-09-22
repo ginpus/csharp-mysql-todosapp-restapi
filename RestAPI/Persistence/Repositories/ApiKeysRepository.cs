@@ -24,7 +24,7 @@ namespace Persistence.Repositories
 
         public async Task<IEnumerable<ApikeyReadModel>> GetAllApiKeyAsync(Guid userid)
         {
-            var sqlSelect = $"SELECT id, apikey, userid, isactive, datecreated, expirationdate FROM {ApiKeysTable} WHERE userid = @userid";
+            var sqlSelect = $"SELECT id, apikey, userid, isactive, datecreated, expirationdate FROM {ApiKeysTable} WHERE userid = @userid ORDER BY datecreated desc";
 
             var allApiKeys = await _sqlClient.QueryAsync<ApikeyReadModel>(sqlSelect, new
             {
