@@ -1,19 +1,21 @@
 ﻿using Contracts.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RestAPI.Dtos
+namespace Contracts.Models.RequestModels
 {
-    public class TodoItemResponse
+    public class AddTodoRequest
     {
-        public Guid Id { get; set; }
+        [Required]
         public string Title { get; set; }
+
+        [Required]
         public string Description { get; set; }
+
+        [Required]
         public Difficulty Difficulty { get; set; }
-        public DateTime Date_Created { get; set; }
-        public bool IsDone { get; set; }
-        public Guid UserId { get; set; }
     }
 }

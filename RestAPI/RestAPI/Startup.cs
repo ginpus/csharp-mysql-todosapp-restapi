@@ -13,6 +13,7 @@ using Persistence;
 using Persistence.Client;
 using Persistence.Repositories;
 using RestAPI.Options;
+using RestAPI.Services;
 using RestAPI.SwaggerSettings;
 using System;
 using System.Collections.Generic;
@@ -48,6 +49,8 @@ namespace RestAPI
             });
 
             services.AddPersistence(Configuration);
+
+            services.AddSingleton<IApiKeysService, ApiKeysService>();
 
             services.AddSwaggerGen(options =>
             {

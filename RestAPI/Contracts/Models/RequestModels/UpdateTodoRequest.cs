@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RestAPI.Dtos
+namespace Contracts.Models.RequestModels
 {
     public class UpdateTodoRequest
     {

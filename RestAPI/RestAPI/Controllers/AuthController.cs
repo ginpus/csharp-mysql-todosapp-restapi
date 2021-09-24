@@ -7,7 +7,6 @@ using Persistence.Models;
 using Persistence.Models.ReadModels;
 using Persistence.Repositories;
 using RestAPI.Attributes;
-using RestAPI.Dtos;
 using RestAPI.Options;
 using System;
 using System.Collections.Generic;

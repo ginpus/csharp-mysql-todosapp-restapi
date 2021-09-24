@@ -1,7 +1,8 @@
-﻿using Contracts.Models.ResponseModels;
+﻿using Contracts.Models.RequestModels;
+using Contracts.Models.ResponseModels;
 using Persistence.Models;
 using Persistence.Models.ReadModels;
-using RestAPI.Dtos;
+using RestAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,6 +63,19 @@ namespace RestAPI
         }
 
         public static ApiKeyResponse AsDto(this ApikeyReadModel apiKey)
+        {
+            return new ApiKeyResponse
+            {
+                Id = apiKey.Id,
+                ApiKey = apiKey.ApiKey,
+                UserId = apiKey.UserId,
+                IsActive = apiKey.IsActive,
+                DateCreated = apiKey.DateCreated,
+                ExpirationDate = apiKey.ExpirationDate
+            };
+        }
+
+        public static ApiKeyResponse AsDto(this ApiKeyModel apiKey)
         {
             return new ApiKeyResponse
             {
