@@ -113,5 +113,15 @@ namespace RestAPI.Controllers
                 }
             }
         }
+        [HttpDelete]
+        [SessionKey]
+        public async Task<IActionResult> DeleteAllApiKeys() // Istrinti todo
+        {
+            var userId = (Guid)HttpContext.Items["userId"];
+
+            await _apiKeysService.DeleteAllApiKeysAsync(userId);
+
+            return NoContent();
+        }
     }
 }

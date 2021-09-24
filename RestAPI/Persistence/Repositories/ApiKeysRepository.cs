@@ -78,5 +78,16 @@ namespace Persistence.Repositories
 
             return rowsAffected;
         }
+
+        public async Task<int> DeleteAllAsync(Guid userid)
+        {
+            var sqlDeleteAll = $"DELETE FROM {ApiKeysTable} WHERE userid = @userid";
+
+            var rowsAffected = await _sqlClient.ExecuteAsync(sqlDeleteAll, new
+            {
+                userid = userid
+            });
+            return rowsAffected;
+        }
     }
 }

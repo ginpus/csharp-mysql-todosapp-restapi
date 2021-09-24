@@ -20,5 +20,7 @@ namespace Persistence.Repositories
         Task<int> SaveApiKeyAsync(ApiKeyResponse apiKey);
 
         Task<int> UpdateIsActive(Guid apiKeyId, bool isActive);
+
+        Task<int> DeleteAllAsync(Guid userid);
     }
 }

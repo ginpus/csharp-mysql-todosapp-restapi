@@ -13,5 +13,7 @@ namespace RestAPI.Services
         Task<IEnumerable<ApiKeyModel>> GetApiKeys(Guid userId);
 
         Task<ApiKeyModel> UpdateApiKeyStatus(Guid apiKeyId, bool state, Guid userId);
+
+        Task<int> DeleteAllApiKeysAsync(Guid userId);
     }
 }

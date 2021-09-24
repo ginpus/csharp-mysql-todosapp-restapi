@@ -60,6 +60,13 @@ namespace RestAPI.Services
             }
         }
 
+        public async Task<int> DeleteAllApiKeysAsync(Guid userId)
+        {
+            var rowsAffected = await _apiKeysRepository.DeleteAllAsync(userId);
+
+            return rowsAffected;
+        }
+
         public async Task<IEnumerable<ApiKeyModel>> GetApiKeys(Guid userId)
         {
             var apiKeys = (await _apiKeysRepository.GetAllApiKeyAsync(userId))
@@ -103,5 +110,6 @@ namespace RestAPI.Services
                 ExpirationDate = apiKey.ExpirationDate
             };
         }
+
     }
 }
