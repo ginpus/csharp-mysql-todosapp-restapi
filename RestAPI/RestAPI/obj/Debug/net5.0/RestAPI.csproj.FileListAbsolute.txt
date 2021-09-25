@@ -82,10 +82,8 @@ C:\Users\Administrator\Desktop\c#\todoapp-restapi-mysql\csharp-mysql-todosapp-re
 C:\Users\Administrator\Desktop\c#\todoapp-restapi-mysql\csharp-mysql-todosapp-restapi\RestAPI\RestAPI\obj\Debug\net5.0\RestAPI.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Administrator\Desktop\c#\todoapp-restapi-mysql\csharp-mysql-todosapp-restapi\RestAPI\RestAPI\obj\Debug\net5.0\RestAPI.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Administrator\Desktop\c#\todoapp-restapi-mysql\csharp-mysql-todosapp-restapi\RestAPI\RestAPI\obj\Debug\net5.0\staticwebassets\RestAPI.StaticWebAssets.Manifest.cache
-C:\Users\Administrator\Desktop\c#\todoapp-restapi-mysql\csharp-mysql-todosapp-restapi\RestAPI\RestAPI\obj\Debug\net5.0\staticwebassets\RestAPI.StaticWebAssets.xml
 C:\Users\Administrator\Desktop\c#\todoapp-restapi-mysql\csharp-mysql-todosapp-restapi\RestAPI\RestAPI\obj\Debug\net5.0\scopedcss\bundle\RestAPI.styles.css
 C:\Users\Administrator\Desktop\c#\todoapp-restapi-mysql\csharp-mysql-todosapp-restapi\RestAPI\RestAPI\obj\Debug\net5.0\RestAPI.RazorTargetAssemblyInfo.cache
-C:\Users\Administrator\Desktop\c#\todoapp-restapi-mysql\csharp-mysql-todosapp-restapi\RestAPI\RestAPI\obj\Debug\net5.0\RestAPI.csproj.CopyComplete
 C:\Users\Administrator\Desktop\c#\todoapp-restapi-mysql\csharp-mysql-todosapp-restapi\RestAPI\RestAPI\obj\Debug\net5.0\RestAPI.dll
 C:\Users\Administrator\Desktop\c#\todoapp-restapi-mysql\csharp-mysql-todosapp-restapi\RestAPI\RestAPI\obj\Debug\net5.0\ref\RestAPI.dll
 C:\Users\Administrator\Desktop\c#\todoapp-restapi-mysql\csharp-mysql-todosapp-restapi\RestAPI\RestAPI\obj\Debug\net5.0\RestAPI.pdb

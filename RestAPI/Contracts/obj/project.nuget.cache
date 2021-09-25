@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "XNT/0+0extseKloxU6O1Q+2hlM3xIrQ2jWSmi32z0fQvEqowg2/Nhsa+c/WQKizrknN+3++6WprYl+rrqz35gQ==",
+  "dgSpecHash": "jP7l6xzSRYpqXRp1bibmnR1skDeLwidLz8kjvHbPM3uvqvUsj00jrHywmicXBBmcBDlVrbfU3lDBB1trwJXtQA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Administrator\\Desktop\\c#\\todoapp-restapi-mysql\\csharp-mysql-todosapp-restapi\\RestAPI\\Contracts\\Contracts.csproj",
   "expectedPackageFiles": [],

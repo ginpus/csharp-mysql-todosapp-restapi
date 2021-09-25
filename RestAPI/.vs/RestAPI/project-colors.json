@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "e2c5dfa8-3307-435b-b75e-70ab9adc4229": {
+      "ProjectGuid": "e2c5dfa8-3307-435b-b75e-70ab9adc4229",
+      "DisplayName": "RestAPI",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

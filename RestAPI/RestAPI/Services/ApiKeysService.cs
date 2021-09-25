@@ -27,7 +27,7 @@ namespace RestAPI.Services
         {
             var apiKeys = await _apiKeysRepository.GetAllApiKeyAsync(userId);
 
-            const int countLimit = 3;
+            var countLimit = _apiKeySettings.MaxApiKeyNumber;
 
             if (apiKeys.Count() < countLimit) { 
 
